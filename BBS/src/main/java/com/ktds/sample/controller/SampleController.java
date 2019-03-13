@@ -33,7 +33,7 @@ public class SampleController {
         return mv;
     }
     
-    @RequestMapping(value = "/sample2", method = RequestMethod.GET)
+    @RequestMapping(value = "/sample22", method = RequestMethod.GET)
 	public String boardList22(Locale locale, Model model) {
 		String testData = "youngbin";
 		model.addAttribute("serverTime", testData );

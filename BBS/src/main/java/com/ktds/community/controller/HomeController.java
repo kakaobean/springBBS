@@ -22,24 +22,23 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home(Locale locale, Model model) {
+//		logger.info("Welcome home! The client locale is {}.", locale);
 //		
 //		Date date = new Date();
 //		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 //		
 //		String formattedDate = dateFormat.format(date);
-		String testData = "youngbin";
-		model.addAttribute("serverTime", testData );
-		
-		return "home";
-	}
-    @RequestMapping(value = "/loadTest", method = RequestMethod.GET)
-	public String boardList(Locale locale, Model model) {
-		String testData = "youngbin";
-		model.addAttribute("serverTime", testData );
-		
-		return "boardList";
+//		String testData = "youngbin";
+//		model.addAttribute("serverTime", testData );
+//		
+//		return "home";
+//	}
+	
+	
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+	public String boardList() {
+		return "index";
 	}
 }
