@@ -1,4 +1,4 @@
-package com.ktds.community;
+package com.ktds.community.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -35,5 +35,11 @@ public class HomeController {
 		
 		return "home";
 	}
-	
+    @RequestMapping(value = "/loadTest", method = RequestMethod.GET)
+	public String boardList(Locale locale, Model model) {
+		String testData = "youngbin";
+		model.addAttribute("serverTime", testData );
+		
+		return "boardList";
+	}
 }
