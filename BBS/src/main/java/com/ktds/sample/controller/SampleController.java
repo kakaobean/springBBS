@@ -24,11 +24,12 @@ public class SampleController {
     @RequestMapping(value="/sample/openSampleBoardList.do")
     public ModelAndView openSampleBoardList(Map<String, Object> commandMap) throws Exception{
     	
-        ModelAndView mv = new ModelAndView("/boardList");
+        ModelAndView mv = new ModelAndView("redirect:/");
          
+        System.out.println("controller1::");
         List<Map<String,Object>> list = sampleService.selectBoardList(commandMap);
         mv.addObject("list", list);
-        System.out.println("DebugTest::"+list);
+        System.out.println("controller2::");
          
         return mv;
     }

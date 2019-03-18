@@ -46,7 +46,7 @@
 									</div>
 								</li>
 							</ul>
-							<a href="" class="btn_login_img" ng-click="vm.doLogin()"><input type="image" src="assets/img/portal/sub/btn_login.gif" title="로그인"></a>
+							<a href="" class="btn_login_img" ng-click="vm.doLogin()"><input type="image" title="로그인"></a>
 							<div class="id-save">
 								<span class="fleft">
 									<input ng-model="vm.saveUseIdPassWord" ng-true-value="'Y'" ng-false-value="'N'" type="checkbox" id="p6" class="ng-pristine ng-untouched ng-valid ng-not-empty">
@@ -67,11 +67,11 @@
 							<ul class="login_btn_area">
 								<li>
 									<span class="ment">아이디/ 비밀번호를<br>잊으셨나요?</span>
-									<a href="/bdip/components/portal/index.html#/portal/join/joinUs/findId" class="linkfit"><img src="assets/img/portal/sub/btn_find_pw.gif" title="아이디/비밀번호 찾기"></a>
+									<a href="/bdip/components/portal/index.html#/portal/join/joinUs/findId" class="linkfit"><img src="" title="아이디/비밀번호 찾기"></a>
 								</li>
 								<li>
 									<span class="ment">KT Bigsight에<br>처음 오셨나요?</span>
-									<a href="<c:url value = "/member/regist"/>" class="linkfit"><img src="assets/img/portal/sub/btn_join.gif" title="회원가입"></a>
+									<a href="<c:url value = "/member/regist"/>" class="linkfit"><img src="" title="회원가입"></a>
 								</li>
 							</ul>
 							

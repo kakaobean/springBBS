@@ -28,7 +28,7 @@
             <c:when test="${fn:length(list) > 0}">
                 <c:forEach items="${list}" var="row">
                     <tr>
-                        <td>${row.IDX }test</td>
+                        <td>${row.IDX }test22</td>
                         <td>${row.title}</td>
                         <td>${row.hit_cnt}</td>
                         <td>${row.CREA_DTM }</td>

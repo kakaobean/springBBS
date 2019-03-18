@@ -14,9 +14,31 @@
 	href="<c:url value="/static/css/flink.css"/>">
 <script src="<c:url value="/static/js/jquery-3.3.1.min.js"/>"
 	type="text/javascript"></script>
+	
+<script type="text/javascript">
+	$().ready(function(){
+		$("#register").click(function(){
+			if($("#id").val() == "" ){
+				alert("아이디 입력하세요");
+			} else if($("#pw1").val() == "" ) {
+				alert("비번 입력해주세요");
+			} else if($("#pw1").val() != $("#pw2").val() ) {
+				alert("비번이 일치하지 않습니다.");
+			} else if($("#name").val() == "" ) {
+				alert("이름을 입력해주세요");
+			} else {
+				$("#thisForm").attr({
+					"method" : "post",
+					"action" : "<c:url value="/registAction"/>"
+				}).submit();
+			}
+		});
+		
+	});
+</script>
 </head>
 <body>
-	<div ui-view="" class="ng-scope" style="">
+	<div>
 		<!-- 
    Bigdata Intelligence Platform version 1.0
    
@@ -30,7 +52,7 @@
  -->
 
 
-		<div ng-hide="pvm.isHide" class="portal_common ng-scope" style="">
+		<div>
 			<!-- s:skip navigation -->
 			<div id="skipnavigation">
 				<ul class="skip">
@@ -45,501 +67,10 @@
 				<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 				<!-- [HEADER] -->
 				
-				<div id="header" ui-view="header" class="ng-scope">
-					<!-- 
-   Bigdata Intelligence Platform version 1.0
-   
-   Copyright ⓒ 2017 kt corp. All rights reserved.
-   
-   This is a proprietary software of kt corp, and you may not use this file except in 
-   compliance with license agreement with kt corp. Any redistribution or use of this 
-   software, with or without modification shall be strictly prohibited without prior written 
-   approval of kt corp, and the copyright notice above does not evidence any actual or 
-   intended publication of such software. 
- -->
-
-					<div class="header ng-scope">
-						<h1>
-							<a href="<c:url value="/"/>"><img
-								src="https://bigsight.kt.com/bdip/assets/img/portal/common/bigsight_logo.png"
-								alt="KT BigSight">KT BigSight</a>
-						</h1>
-					</div>
-					<div class="gnbArea ng-scope" id="gnbNavi">
-
-
-						<!-- gnb -->
-						<div id="gnb">
-							<!-- ngRepeat: menu in pvm.menuList -->
-							<div class="tit-0" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==0 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(0,menu.routeState);"
-									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">BigSight 소개</span></a>
-								<div class="twoD">
-
-									<!-- ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==0 &amp;&amp; portalTabIndex==0) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(0,tab.routeState,0, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">kt BigSight 소개</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==0 &amp;&amp; portalTabIndex==1) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(0,tab.routeState,1, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">kt 인구통계분석</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==0 &amp;&amp; portalTabIndex==2) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(0,tab.routeState,2, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">kt 빅데이터 소개</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-
-								</div>
-							</div>
-							<!-- end ngRepeat: menu in pvm.menuList -->
-							<div class="tit-1" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==1 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(1,menu.routeState);"
-									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">BigSight 서비스</span></a>
-								<div class="twoD">
-
-									<!-- ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==1 &amp;&amp; portalTabIndex==0) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(1,tab.routeState,0, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">TrIP (관광분석솔루션)</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==1 &amp;&amp; portalTabIndex==1) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(1,tab.routeState,1, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">GrIP (상권분석솔루션)</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==1 &amp;&amp; portalTabIndex==2) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(1,tab.routeState,2, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">ALP (생활인구분석솔루션)</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==1 &amp;&amp; portalTabIndex==3) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(1,tab.routeState,3, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope ng-hide  hasSub"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  -->
-										<!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">맞춤형솔루션</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-											<span ng-repeat="tab2 in tab.tabList"
-												ng-click="portalMenuClick(1,tab2.routeState,0, tab.tabList.length, true);"
-												ng-hide="!tab2.accAuth.match(UserInfo.dmpAuthInfo.dmpAcessId)"
-												class="ng-binding ng-scope"> 광고DMP </span>
-											<!-- end ngRepeat: tab2 in tab.tabList -->
-											<span ng-repeat="tab2 in tab.tabList"
-												ng-click="portalMenuClick(1,tab2.routeState,1, tab.tabList.length, true);"
-												ng-hide="!tab2.accAuth.match(UserInfo.dmpAuthInfo.dmpAcessId)"
-												class="ng-binding ng-scope"> 커머스Offering </span>
-											<!-- end ngRepeat: tab2 in tab.tabList -->
-											<span ng-repeat="tab2 in tab.tabList"
-												ng-click="portalMenuClick(1,tab2.routeState,2, tab.tabList.length, true);"
-												ng-hide="!tab2.accAuth.match(UserInfo.dmpAuthInfo.dmpAcessId)"
-												class="ng-binding ng-scope"> 개인시청률통계 </span>
-											<!-- end ngRepeat: tab2 in tab.tabList -->
-											<span ng-repeat="tab2 in tab.tabList"
-												ng-click="portalMenuClick(1,tab2.routeState,3, tab.tabList.length, true);"
-												ng-hide="!tab2.accAuth.match(UserInfo.dmpAuthInfo.dmpAcessId)"
-												class="ng-binding ng-scope"> NSM키워드광고솔루션 </span>
-											<!-- end ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==1 &amp;&amp; portalTabIndex==4) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(1,tab.routeState,4, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">솔루션 활용 가이드</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-
-								</div>
-							</div>
-							<!-- end ngRepeat: menu in pvm.menuList -->
-							<div class="tit-2" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==2 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(2,menu.routeState);"
-									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">Intelligence
-										Data Hub</span></a>
-								<div class="twoD">
-
-									<!-- ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==0) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,0, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">데이터스토어 소개</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==1) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,1, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">유동인구</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==2) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,2, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">교통수요예측</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==3) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,3, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">부동산</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==4) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,4, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">Open API</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==2 &amp;&amp; portalTabIndex==5) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(2,tab.routeState,5, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">Data Set</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-
-								</div>
-							</div>
-							<!-- end ngRepeat: menu in pvm.menuList -->
-							<div class="tit-3" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==3 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(3,menu.routeState);"
-									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">서비스 정책</span></a>
-								<div class="twoD">
-
-									<!-- ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==3 &amp;&amp; portalTabIndex==0) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(3,tab.routeState,0, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">회원등급/서비스</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==3 &amp;&amp; portalTabIndex==1) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(3,tab.routeState,1, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">상품서비스안내</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-
-								</div>
-							</div>
-							<!-- end ngRepeat: menu in pvm.menuList -->
-							<div class="tit-4" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==4 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(4,menu.routeState);"
-									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">고객센터</span></a>
-								<div class="twoD">
-
-									<!-- ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==4 &amp;&amp; portalTabIndex==0) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(4,tab.routeState,0, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">공지사항</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==4 &amp;&amp; portalTabIndex==1) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(4,tab.routeState,1, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">FAQ</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==4 &amp;&amp; portalTabIndex==2) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(4,tab.routeState,2, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">1:1문의</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==4 &amp;&amp; portalTabIndex==3) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(4,tab.routeState,3, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">계약상담문의</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-									<a ng-repeat="tab in menu.tabList"
-										ng-class="[(portalMenuIndex==4 &amp;&amp; portalTabIndex==4) &amp;&amp; tab.tabList.length==0 ? 'on' : '' , tab.tabList.length>0 ? 'hasSub' : '']"
-										ng-click="portalMenuClick(4,tab.routeState,4, tab.tabList.length);"
-										style="cursor: pointer;"
-										ng-hide="(tab.title=='맞춤형솔루션' &amp;&amp; (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL))"
-										class="ng-scope"> <!--운영 - 생활인구분석솔루션 권한 없는경우 안보이게  --> <!-- ng-hide="(tab.title=='맞춤형솔루션' && (UserInfo.dmpAuthInfo.dmpUseYn=='N' || UserInfo.dmpAuthInfo.dmpUseYn == NULL)) || (tab.title=='ALP (생활인구분석솔루션)' && (UserInfo.alpUseYn=='N'||UserInfo.alpUseYn == NULL||UserInfo.alpUseYn == ''))"> -->
-
-										<!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' -->
-										<span ng-bind="tab.title"
-										ng-if="tab.title!='MoIP (모바일콘텐츠분석솔루션)'"
-										class="ng-binding ng-scope">자료실</span>
-									<!-- end ngIf: tab.title!='MoIP (모바일콘텐츠분석솔루션)' --> <!-- ngIf: tab.title=='MoIP (모바일콘텐츠분석솔루션)' -->
-
-										<div class="threeD ng-hide" ng-hide="tab.tabList==null">
-											<!-- ngRepeat: tab2 in tab.tabList -->
-										</div>
-									</a>
-									<!-- end ngRepeat: tab in menu.tabList -->
-
-								</div>
-							</div>
-							<!-- end ngRepeat: menu in pvm.menuList -->
-						</div>
-						<!--//gnb-->
-
-					</div>
-					<!--//gnbArea-->
-				</div>
+				
 				<!-- [BODY] -->
 				<!-- uiView: body -->
-				<div id="cBody" class="cBody ng-scope" ui-view="body">
+				<div id="cBody" class="cBody ng-scope" >
 					<div class="cBody ng-scope" id="cBody">
 
 						<div class="container">
@@ -566,25 +97,19 @@
                     <p><input class="chk" name="type" id="type2" type="radio" value="가맹점점주"><label for="member">가맹점 점주</label></p>	
                 </li>
                 -->
+<!--                 									onkeyup="mb.checkChar(this.name);" onkeypress="if(event.keyCode === 13){mb.checkID(); return false;}" -->
 													<li><input title="아이디" class="i_text" type="text"
 														name="id" id="id" placeholder="아이디" style="width: 360px"
-														maxlength="30" onkeyup="mb.checkChar(this.name);"
-														onkeypress="if(event.keyCode === 13){mb.checkID(); return false;}">
-														<button class="join_btn1"
-															onclick="mb.checkID(); return false;">중복확인</button></li>
+														maxlength="30">
+														<button type="button" class="join_btn1" >중복확인</button></li>
 													<li><input title="비밀번호" class="i_text" type="password"
 														name="pw1" id="pw1" placeholder="비밀번호(8자리 이상)"
-														maxlength="15" onkeyup="mb.checkChar(this.name);"
-														onkeypress="if(event.keyCode === 13){mb.join(); return false;}"></li>
+														maxlength="15" ></li>
 													<li><input title="비밀번호 확인" class="i_text"
 														type="password" name="pw2" id="pw2"
-														placeholder="비밀번호(8자리 이상) 확인" maxlength="15"
-														onkeyup="mb.checkChar(this.name);"
-														onkeypress="if(event.keyCode === 13){mb.join(); return false;}"></li>
+														placeholder="비밀번호(8자리 이상) 확인" maxlength="15"></li>
 													<li><input title="이름" class="i_text" type="text"
-														name="name" id="name" placeholder="이름"
-														onkeyup="mb.checkChar(this.name);"
-														onkeypress="if(event.keyCode === 13){mb.join(); return false;}"></li>
+														name="name" id="name" placeholder="이름"></li>
 													<li><select name="year" id="year">
 															<option value="">년</option>
 															<option value="2019">2019</option>
@@ -939,36 +464,7 @@
 														소송이 제기될 경우 회사의 본사 소재지를 관할하는 법원을 관할법원으로 합니다. <br> <br>
 														[부칙] <br> 본 약관은 2018년 5월 31일부터 적용됩니다.<br>
 													</li>
-													<button class="join_btn" onclick="mb.join(); return false;">회원가입
-														완료</button>
-													<!-- Mobon Tracker v3.1 [전환] start -->
-													<script type="text/javascript">
-													<!--
-														function mobConv() {
-															var cn = new EN();
-															cn
-																	.setData(
-																			"uid",
-																			"mkbiz2000");
-															cn.setData(
-																	"ordcode",
-																	"");
-															cn.setData("qty",
-																	"1");
-															cn.setData("price",
-																	"1");
-															cn
-																	.setData(
-																			"pnm",
-																			encodeURIComponent(encodeURIComponent("counsel")));
-															cn.setSSL(true);
-															cn.sendConv();
-														}
-													//-->
-													</script>
-													<script src="https://cdn.megadata.co.kr/js/enliple_min2.js"
-														defer="defer" onload="mobConv()"></script>
-													<!-- Mobon Tracker v3.1 [전환] end -->
+													<button type="button" class="join_btn" id="register">회원가입완료</button>
 												</ul>
 											</fieldset>
 										</form>
