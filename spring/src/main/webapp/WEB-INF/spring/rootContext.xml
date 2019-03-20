@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	  	<property name="driverClassName" value="org.postgresql.Driver"/>
+	  	<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
+	  	<property name="username" value="postgres"/>
+	  	<property name="password" value="1161"/>
+	</bean>
+
+	<!-- MyBatis 설정 -->
+	<!-- myBatis가 db에 접속 할 수 있도록 도와주는 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">       
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:/mybatis/mybatis.xml"/> 
+	</bean>
+	
+	<!-- MyBatis가 db에 Query(SQL)을 실행하고 결과를 받아오게 도와주는 설정 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	
+<!--         <property name="mapperLocations" value="classpath:/mapper/**/*_SQL.xml" /> -->
+	
+</beans>
