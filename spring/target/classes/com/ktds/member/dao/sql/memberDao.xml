@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sample">
+	<select id="selectBoardList" resultType="String">
+		SELECT
+		TITLE 
+		FROM 
+		TB_BOARD
+	</select>
+	<select id="validMember" parameterType="com.ktds.member.vo.MemberVO" resultType="_int">
+		select count(*) from public.member where eamil =  #{id} and password = #{pw1}
+	</select>
+	
+	<insert id="insertMember" parameterType="com.ktds.member.vo.MemberVO">
+		INSERT INTO public.member(
+            eamil,
+            password,
+            nickname
+        ) 
+    	VALUES (
+    		#{id},
+    		#{pw1},
+    		#{name}
+		);
+		
+	</insert>
+</mapper>
