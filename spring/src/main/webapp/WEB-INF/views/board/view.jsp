@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/ui.css"/>">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/static/css/flink.css"/>">
-<link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/bootstrap.min.css"/>">
 <script src="<c:url value="/static/js/jquery-3.3.1.min.js"/>"
 	type="text/javascript"></script>
@@ -104,7 +102,7 @@
 											<caption>문의내용 입력</caption>
 
 											<colgroup>
-												<col width="15%">
+												<col width="17%">
 												<col width="*">
 												<col width="15%">
 												<col width="*">

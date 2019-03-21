@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/ui.css"/>">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/static/css/flink.css"/>">
-<link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/bootstrap.min.css"/>">
 <script src="<c:url value="/static/js/jquery-3.3.1.min.js"/>"
 	type="text/javascript"></script>
@@ -104,7 +102,7 @@
 											<caption>문의내용 입력</caption>
 
 											<colgroup>
-												<col width="15%">
+												<col width="17%">
 												<col width="*">
 												<col width="15%">
 												<col width="*">
@@ -156,7 +154,7 @@
 									</div>
 									<!-- 버튼 -->
 									<div class="btn-wrap taC mt20">
-										<a ng-click="vm.regClick()" href="javascript:;"
+										<a ng-click="vm.regClick()" href="<c:url value="/writeAction"/>"
 											class="form_btn" ng-hide="UserInfo.bdipUserId==''">등록</a> <a
 											href="javascript:;" ng-click="vm.cancel()"
 											class="form_btn cancel">취소</a>

@@ -628,6 +628,8 @@ body.login{background:#e2e2e2;}
 .conDiv .title-area .txt-right{position:relative;float:right;font-weight:normal; color:#777;font-size:12px;top:6px;}
 .conDiv h3{font-size:16px; color:#333; letter-spacing:-1px; font-weight:bold;}
 .conDiv h3 span{color:#d2001f;padding-right:5px;}
+.conDiv .asterisk {display:inline-block;width:7px;height:7px;margin:0 0 3px 5px;background:url('https://bigsight.kt.com/bdip/assets/img/portal/ico/bu_asterisk.png') no-repeat;font-size:0;line-height:0;vertical-align:middle}
+.conDiv .title{background:url('../../img/portal/ico/icon_thrD_dot.gif') no-repeat 0 2px;height:20px;font-size:13px; letter-spacing:-0.5px; color:#333; font-weight:bold; padding-left:20px; position:relative}
 .conDiv .grayBox{line-height:23px; color:#d2001f; background:#f6f6f7; padding:13px 20px 16px}
 .conDiv .grayBox2{line-height:21px; color:#666; background:#fafafa; padding:7px 15px 11px; font-size:12px; border:1px solid #eee}
 .conDiv .grayBox3{line-height:23px; padding:13px 20px 16px 80px; background:#f6f6f7 url("../../img/portal/ico/icon_point.png") no-repeat 20px center; color:#666}

@@ -11,8 +11,6 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/ui.css"/>">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/static/css/flink.css"/>">
-<link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/bootstrap.min.css"/>">
 <script src="<c:url value="/static/js/jquery-3.3.1.min.js"/>"
 	type="text/javascript"></script>
@@ -30,7 +28,7 @@
 			} else if ($("#pw1").val() != $("#pw2").val()) {
 				alert("비번이 일치하지 않습니다.");
 			} else if ($("#name").val() == "") {
-				alert("이름을 입력해주세요");
+				alert("이름을 입력해주세요"); 
 			} else {
 				$("#thisForm").attr({
 					"method" : "post",
@@ -218,7 +216,7 @@
 									</div>
 									<!-- // paginate -->
 									<div style="text-align:right;">
-										<a type="button" style="border:solid 1px;" href="/board/write">글 쓰기</a>
+										<a type="button" style="border:solid 1px;"class="form_btn" href="/board/write">글 쓰기</a>
 									</div>
 										
 

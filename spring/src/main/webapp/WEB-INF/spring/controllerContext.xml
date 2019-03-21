@@ -9,7 +9,7 @@
 		<property name="memberService" ref="memberService"></property>
 	</bean>
 	<bean id="boardController" class="com.ktds.board.controller.BoardController" >
-	
+		<property name="boardService" ref="boardService"></property>
 	</bean>
 </beans>
  
