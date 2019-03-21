@@ -1,6 +1,7 @@
 package com.ktds.board.service;
 
 import com.ktds.board.dao.BoardDao;
+import com.ktds.board.vo.BoardVO;
 
 public class BoardServiceImpl implements BoardService{
 
@@ -18,9 +19,10 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-	public void insertBoard() {
+	public void insertBoard(BoardVO boardVO) {
 		System.out.println("서비스 연결");
-		boardDao.insertBoard();
+		boardDao.insertBoard(boardVO);
 	}
+
 
 }

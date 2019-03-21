@@ -11,7 +11,8 @@
 
 	<mappers>
 		<mapper resource="com/ktds/member/dao/sql/memberDao.xml" />
+		<mapper resource="com/ktds/board/dao/sql/boardDao.xml" />
 	</mappers>
  
 </configuration>
-    
+     

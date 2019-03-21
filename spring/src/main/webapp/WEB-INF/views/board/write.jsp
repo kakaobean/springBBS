@@ -96,7 +96,7 @@
 										<span class="txt-right"><span class="asterisk mr3">필수입력항목</span>는
 											필수 입력사항입니다.</span>
 									</div>
-
+									<form  action="/writeAction" method="post">
 									<div class="listForm3 mt10">
 										<table summary="문의내용 입력">
 											<caption>문의내용 입력</caption>
@@ -118,14 +118,14 @@
 													<th>문의제목<span class="asterisk">필수입력항목</span></th>
 													<td class="tal" colspan="3"><input id="inquery_title"
 														ng-model="vm.inquiryData.bdipInqrTitleNm" type="text"
-														name="" value="" title="문의제목입력" style="width: 99%;"
+														name="title" value="${title}" title="문의제목입력" style="width: 99%;"
 														class="ng-pristine ng-untouched ng-valid ng-empty"></td>
 												</tr>
 												<tr>
 													<th>문의내용<span class="asterisk">필수입력항목</span></th>
-													<td class="tal" colspan="3"><textarea id="inquery_txt"
-															ng-model="vm.inquiryData.bdipInqrSbst" maxlength="500"
-															name="textarea" style="width: 99%; height: 200px;"
+													<td class="tal" colspan="3"><textarea id="inquery_txt" 
+															 maxlength="500"
+															name="body" style="width: 99%; height: 200px;"
 															placeholder="500자 이내로 입력해 주세요."
 															class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"></textarea></td>
 												</tr>
@@ -154,11 +154,14 @@
 									</div>
 									<!-- 버튼 -->
 									<div class="btn-wrap taC mt20">
-										<a ng-click="vm.regClick()" href="<c:url value="/writeAction"/>"
-											class="form_btn" ng-hide="UserInfo.bdipUserId==''">등록</a> <a
-											href="javascript:;" ng-click="vm.cancel()"
-											class="form_btn cancel">취소</a>
+										<button type="submit" class="form_btn" ">등록</button> 
+										<a href="javascript:;" class="form_btn cancel">취소</a>
 									</div>
+<!-- 									<div class="btn-wrap taC mt20"> -->
+<%-- 										<a href="<c:url value="/writeAction"/>" class="form_btn" ">등록</a>  --%>
+<!-- 										<a href="javascript:;" class="form_btn cancel">취소</a> -->
+<!-- 									</div> -->
+									</form>
 
 								</div>
 								<!--//conDiv-->
