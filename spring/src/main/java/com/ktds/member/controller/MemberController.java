@@ -3,6 +3,7 @@ package com.ktds.member.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,14 +38,15 @@ public class MemberController {
 		return "member/login";
 	}
 	@RequestMapping(value="/loginAction", method = RequestMethod.POST)
-	public String loginAction(MemberVO memberVO) {
+	public String loginAction(MemberVO memberVO, Model model) {
 		if(memberService.validMember(memberVO)) {
 			logger.info("::::: loginAction ok!{}.", locale);
+			model.addAttribute("loginValid", "true");
 			return "redirect:/";
 		}
 		logger.info("::::: not loginAction!{}.", memberService.validMember(memberVO)); 
 		System.out.println(memberVO.getId() + memberVO.getPw1() + memberVO.getName());
-		
+		model.addAttribute("loginValid", "false");
 		return "member/login";
 	}
 	@RequestMapping(value="/member/regist", method = RequestMethod.GET)

@@ -12,6 +12,8 @@
 	href="<c:url value="/static/css/ui.css"/>">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/static/css/flink.css"/>">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/static/css/bootstrap.min.css"/>">
 <script src="<c:url value="/static/js/jquery-3.3.1.min.js"/>"
 	type="text/javascript"></script>
 
@@ -82,7 +84,7 @@
 						<div class="container">
 							<div class="content">
 								<h2>
-									공지사항 <span class="empPhrase">kt BigSight의 소식을 한눈에
+									게시글<span class="empPhrase">kt BigSight의 소식을 한눈에
 										전해드립니다.</span>
 								</h2>
 
@@ -154,107 +156,6 @@
 
 												</tr>
 												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">26</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:26})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/26">[시스템
-															정기점검 공지] 2018.11.23(금) 19:00~23:00</a></td>
-													<td class="ng-binding">57</td>
-													<td class="ng-binding">2018-11-23</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">25</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:25})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/25">[시스템
-															정기점검 공지] 2018.11.19(월) 20:00~23:00</a></td>
-													<td class="ng-binding">8</td>
-													<td class="ng-binding">2018-11-19</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">24</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:24})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/24">[시스템
-															정기점검 공지] 2018.04.19(목) 18:00~20:00</a></td>
-													<td class="ng-binding">116</td>
-													<td class="ng-binding">2018-04-16</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">23</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:23})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/23">[시스템
-															정기점검 공지] 2018.03.22(목) 18:00~19:00</a></td>
-													<td class="ng-binding">209</td>
-													<td class="ng-binding">2018-03-20</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">21</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:21})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/21">데이터
-															및 분석 지표 제공 관련 안내</a></td>
-													<td class="ng-binding">1488</td>
-													<td class="ng-binding">2017-08-09</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">19</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:19})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/19">[자료등록]
-															TrIP &amp; GrIP 사용자매뉴얼</a></td>
-													<td class="ng-binding">288</td>
-													<td class="ng-binding">2016-12-05</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">17</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:17})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/17">[시스템
-															정기점검 공지] 2016.11.18(금) 18:00~19:00</a></td>
-													<td class="ng-binding">86</td>
-													<td class="ng-binding">2016-11-18</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope">
-
-													<td class="ng-binding">14</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:14})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/14">[Kt
-															BigSight 오픈 안내]</a></td>
-													<td class="ng-binding">301</td>
-													<td class="ng-binding">2016-10-25</td>
-
-												</tr>
-												<!-- end ngRepeat: data in vm.noticeResult -->
-
-												<tr ng-hide="vm.noticeResult.length>0" class="ng-hide"
-													style="">
-													<td colspan="4">조회된 내용이 없습니다.</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -316,6 +217,10 @@
 										</div>
 									</div>
 									<!-- // paginate -->
+									<div style="text-align:right;">
+										<a type="button" style="border:solid 1px;" href="/board/write">글 쓰기</a>
+									</div>
+										
 
 								</div>
 								<!--//conDiv-->
