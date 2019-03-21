@@ -22,4 +22,9 @@
 		);
 		
 	</insert>
+	
+	<select id="readBoardList" resultType="hashmap">
+		select * from public.board order by writedate desc;
+	</select>
+	
 </mapper>

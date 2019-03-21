@@ -1,5 +1,7 @@
 package com.ktds.board.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,13 +33,14 @@ public class BoardController {
 		boardService.insertBoard(boardVO);
 		return "redirect:board/list";
 	}
-	@RequestMapping(value = "/boardList")
+	@RequestMapping(value = "/board/list")
 	public ModelAndView boardList(BoardVO boardVO) {
 		ModelAndView view = new ModelAndView();
 		
-//		List<Board>
+		List<BoardVO> boardList = boardService.readBoardList();
 		
-		view.setViewName("redirect:board/list");
+		System.out.println("게시글 리스트"+boardList);
+		view.addObject("boardData", boardList);
 		
 		return view;
 	}

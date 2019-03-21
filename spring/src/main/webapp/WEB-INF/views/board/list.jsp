@@ -139,22 +139,18 @@
 													<th scope="col">등록일</th>
 												</tr>
 											</thead>
+												<c:forEach items="${boardData}" var="boardData">
 											<tbody>
 												<!-- ngRepeat: data in vm.noticeResult -->
-												<tr ng-repeat="data in vm.noticeResult" class="ng-scope"
-													style="">
-
-													<td class="ng-binding">27</td>
-													<td class="txt"><a
-														ui-sref="portal.faq.noticeDetail({seq:27})"
-														class="ng-binding" href="#/portal/faq/noticeDetail/27">내국인
-															관광객 집계를 정교화하기 위해 현지인 관광객 지표 추가</a></td>
-													<td class="ng-binding">781</td>
-													<td class="ng-binding">2018-12-27</td>
-
-												</tr>
+													<tr>
+														<td>${boardData.no}</td>
+														<td class="txt"><a href="#/portal/faq/noticeDetail/27">${boardData.title}</a></td>
+														<td>${boardData.viewcnt}</td>
+														<td>${boardData.writedate}</td>
+													</tr>
 												<!-- end ngRepeat: data in vm.noticeResult -->
 											</tbody>
+												</c:forEach>
 										</table>
 									</div>
 

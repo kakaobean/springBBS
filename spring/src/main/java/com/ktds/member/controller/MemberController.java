@@ -75,11 +75,6 @@ public class MemberController {
 		logger.info("::::: getdata ok!{}.", locale);
 		return "home";
 	}
-	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	public String board() {
-		logger.info("::::: /board/list ok!{}.", locale);
-		return "board/list";
-	}
 	@RequestMapping(value="/board/view", method = RequestMethod.GET)
 	public String view() {
 		logger.info("::::: board/view ok!{}.", locale);
