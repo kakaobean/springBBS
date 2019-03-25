@@ -28,9 +28,22 @@ public class BoardServiceImpl implements BoardService{
 
 
 	@Override
-	public List<BoardVO> readBoardList() {
+	public List<BoardVO> readBoardList(int id) {
 			
-		return boardDao.readBoardList();
+		return boardDao.readBoardList(id);
+	}
+
+
+	@Override
+	public BoardVO readViewData(int id) {
+		return boardDao.readViewData(id);
+	}
+
+
+	@Override
+	public int readAllCnt() {
+		// TODO Auto-generated method stub
+		return boardDao.readAllCnt();
 	}
 
 

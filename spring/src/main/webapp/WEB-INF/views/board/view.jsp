@@ -77,93 +77,127 @@
 				<!-- [BODY] -->
 				<!-- uiView: body -->
 				<div id="cBody" class="cBody ng-scope">
-					<div class="cBody ng-scope" id="cBody"> 
+					<div class="cBody ng-scope" id="cBody">
 
 						<div class="container">
+
 							<div class="content">
-								<h2>글작성</h2>
+								<h2>
+									공지사항 <span class="empPhrase">kt BigSight의 소식을 한눈에
+										전해드립니다.</span>
+								</h2>
 
 								<div class="conDiv mt35">
 
-
-									<div class="cs_faq mt20">
-										<div>
-										</div>
-									</div>
-
-									<div class="title-area mt30">
-										<h3 class="fL">문의내용 작성</h3>
-										<span class="txt-right"><span class="asterisk mr3">필수입력항목</span>는
-											필수 입력사항입니다.</span>
-									</div>
-
-									<div class="listForm3 mt10">
-										<table summary="문의내용 입력">
-											<caption>문의내용 입력</caption>
-
+									<div class="viewForm1">
+										<table summary="공지사항 상세보기">
+											<caption>공지사항 상세</caption>
 											<colgroup>
-												<col width="17%">
-												<col width="*">
-												<col width="15%">
 												<col width="*">
 											</colgroup>
+											<thead>
+												<tr>
+													<th scope="col">
+														<div class="eventTit">
+															<p class="txt ng-binding">${viewData.title}</p>
+															<p class="txt-fR">
+																<span class="date">${viewData.writeDate}</span> 
+																<span class="count">${viewData.viewCnt}</span>
+															</p>
+														</div>
+													</th>
+												</tr>
+											</thead>
 											<tbody>
 												<tr>
-													<th>문의자명</th>
-													<td class="ng-binding"></td>
-													<th>이메일</th>
-													<td class="ng-binding">91209***@ktfriend.com</td>
-												</tr>
-												<tr>
-													<th>문의제목<span class="asterisk">필수입력항목</span></th>
-													<td class="tal" colspan="3"><input id="inquery_title"
-														ng-model="vm.inquiryData.bdipInqrTitleNm" type="text"
-														name="" value="" title="문의제목입력" style="width: 99%;"
-														class="ng-pristine ng-untouched ng-valid ng-empty"></td>
-												</tr>
-												<tr>
-													<th>문의내용<span class="asterisk">필수입력항목</span></th>
-													<td class="tal" colspan="3"><textarea id="inquery_txt"
-															ng-model="vm.inquiryData.bdipInqrSbst" maxlength="500"
-															name="textarea" style="width: 99%; height: 200px;"
-															placeholder="500자 이내로 입력해 주세요."
-															class="ng-pristine ng-untouched ng-valid ng-empty ng-valid-maxlength"></textarea></td>
-												</tr>
-												<tr>
-													<th>파일첨부</th>
-													<td colspan="3">
-														<div class="btn-wrap">
-															<a href="#" class="fL file_btn">파일등록</a> <input
-																name="Filedata" tabindex="-1" id="fileup"
-																ng-file-select="vm.onfileSelect($files)"
-																style="width: 60px; height: 22px; margin: 0px; padding: 0px; top: 0px; left: 0px; position: absolute; cursor: pointer; opacity: 0;"
-																type="file">
-															<div class="help fL ml10 mt4">※ 10MByte 이하의 파일만
-																가능합니다.</div>
-														</div>
-														<div class="file-w ng-hide"
-															ng-show="vm.selectedfile != null">
-															<a class="file ng-binding"></a><span
-																class="file-size ng-binding">(0MB)</span>
+													<td class="viewDiv">
+														<div class="txt">
+
+															<textarea id="txt_sbst" ng-model="vm.detailData.sbst"
+																disabled="disabled"
+																style="width: 99%; height: 270px; overflow: auto;"
+																class="ng-pristine ng-untouched ng-valid ng-not-empty">${viewData.body}</textarea>
+
 														</div>
 													</td>
-
 												</tr>
 											</tbody>
 										</table>
 									</div>
+
 									<!-- 버튼 -->
 									<div class="btn-wrap taC mt20">
-										<a ng-click="vm.regClick()" href="javascript:;"
-											class="form_btn" ng-hide="UserInfo.bdipUserId==''">수정</a> <a
-											href="javascript:;" ng-click="vm.cancel()"
-											class="form_btn cancel">취소</a>
+										<a ng-click="vm.backListClick()" href="javascript:;"
+											class="form_btn">목록</a>
 									</div>
+
+									<div class="listForm2 mt50">
+										<table summary="이전 다음 글 보기">
+											<caption>내용 보기</caption>
+											<colgroup>
+												<col width="12%">
+												<col width="*">
+												<col width="12%">
+												<col width="9%">
+											</colgroup>
+											<tbody>
+
+												<!-- ngRepeat: d in vm.preNextDatas | filter : {type : 'p'} as p -->
+												<tr class="prvLine ng-scope"
+													ng-repeat="d in vm.preNextDatas | filter : {type : 'p'} as p"
+													style="">
+													<th scope="row"><span>이전글</span></th>
+													<td class="txt"><a href="javascript:;"
+														ng-click="vm.reloadDetail(24)" class="ng-binding">[시스템
+															정기점검 공지] 2018.04.19(목) 18:00~20:00</a></td>
+													<td class="ng-binding"></td>
+													<td class="ng-binding"></td>
+
+												</tr>
+												<!-- end ngRepeat: d in vm.preNextDatas | filter : {type : 'p'} as p -->
+												<!-- ngIf: p.length==0 -->
+
+												<!-- ngRepeat: d in vm.preNextDatas | filter : {type : 'n'} as f -->
+												<tr class="nxtLine ng-scope"
+													ng-repeat="d in vm.preNextDatas | filter : {type : 'n'} as f"
+													style="">
+
+													<th scope="row"><span>다음글</span></th>
+													<td class="txt"><a href="javascript:;"
+														ng-click="vm.reloadDetail(26)" class="ng-binding">[시스템
+															정기점검 공지] 2018.11.23(금) 19:00~23:00</a></td>
+													<td class="ng-binding"></td>
+													<td class="ng-binding"></td>
+
+												</tr>
+												<!-- end ngRepeat: d in vm.preNextDatas | filter : {type : 'n'} as f -->
+												<!-- ngIf: f.length==0 -->
+
+												<!-- 
+							<tr class="prvLine">
+								<th scope="row"><span>이전글</span></th>
+								<td class="txt">이전글이 없습니다.</td>
+								<td>2006-07-25</td>
+								<td>25</td>
+							</tr>
+							<tr class="nxtLine">
+								<th scope="row"><span>다음글</span></th>
+								<td class="txt"><a href="#">익스플로러 11에서 서비스 이용방법 안내
+										내용입니다.</a></td>
+								<td>2005-06-24</td>
+								<td>1225</td>
+							</tr>
+							 -->
+											</tbody>
+										</table>
+									</div>
+									<!--//listForm2-->
 
 								</div>
 								<!--//conDiv-->
 
 							</div>
+
 						</div>
 						<!--//container-->
 

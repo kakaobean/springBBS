@@ -6,7 +6,12 @@ import com.ktds.board.vo.BoardVO;
 
 public interface BoardDao {
 
+
 	void insertBoard(BoardVO boardVO);
 
-	List<BoardVO> readBoardList();
+	List<BoardVO> readBoardList(int id);
+
+	BoardVO readViewData(int id);
+
+	int readAllCnt();
 }

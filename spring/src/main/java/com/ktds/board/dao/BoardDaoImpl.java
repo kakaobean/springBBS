@@ -16,12 +16,23 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao{
 	}
 
 	@Override
-	public List<BoardVO> readBoardList() {
+	public List<BoardVO> readBoardList(int id) {
 		// TODO Auto-generated method stub
 //		List<String> test = getSqlSession().selectList("sample.readBoardList");
 //		System.out.println(test);
 //		System.out.println(getSqlSession().selectList("sample.readBoardList"));
 //		return getSqlSession().selectList("sample.readBoardList");
-		return getSqlSession().selectList("sample.readBoardList");
+		return getSqlSession().selectList("sample.readBoardList", id);
+	}
+
+	@Override
+	public BoardVO readViewData(int id) {
+		return getSqlSession().selectOne("sample.readViewData", id);
+	}
+
+	@Override
+	public int readAllCnt() {
+		// TODO Auto-generated method stub
+		return getSqlSession().selectOne("sample.readAllCnt");
 	}
 }

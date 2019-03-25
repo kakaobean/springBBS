@@ -40,7 +40,110 @@
 			alert();
 			validCheck = true;
 		});
+		// 아작 테스트
+		$(".btnSrch").click(function() { 
+		    	  		alert(data);
+		});
+		
+		
 	});
+ 
+	    var totalData = ${readAllCnt};    // 총 데이터 수
+	    var currentPage = 0;
+	    var dataPerPage = 10;    // 한 페이지에 나타낼 데이터 수
+	    var pageCount = 0;        // 한 화면에 나타낼 페이지 수
+	    if((totalData % dataPerPage) > 0){ 
+	    	pageCount = Math.floor(totalData / dataPerPage) + 1;
+	    } else {
+	    	pageCount = (totalData / dataPerPage) ;
+	    }
+	    if(pageCount > 10){
+	    	pageCount = 10;
+	    }
+	    
+	    function paging(totalData, dataPerPage, pageCount, currentPage){
+	         
+	        console.log("currentPage : " + currentPage);
+	        $.ajax({
+                
+                type : "GET",
+                url : "/board/list/"+currentPage,
+                dataType : "text",
+                error : function(){
+                    alert('통신실패!!');
+                },
+                success : function(data){
+                	console.log(data);
+//                     $("html").html(data) ;
+// 	        $("tbody").html(document.querySelectorAll("tbody")[0].innerHTML);
+// 					console.log(${boardData});
+                }
+            });
+	        // 총 페이지 수
+	        var totalPage = Math.ceil(totalData/dataPerPage);    
+	        // 페이지 그룹
+	        var pageGroup = Math.ceil(currentPage/pageCount);    
+	         
+	        console.log("pageGroup : " + pageGroup);
+	        
+	        var last = pageGroup * pageCount;    // 화면에 보여질 마지막 페이지 번호
+	        var first = last - (pageCount-1);    // 화면에 보여질 첫번째 페이지 번호
+	        if(last > totalPage)
+	            last = totalPage;
+	        var next = last+1;
+	        var prev = first-1;
+	        
+	        console.log("last : " + last);
+	        console.log("first : " + first);
+	        console.log("next : " + next);
+	        console.log("prev : " + prev);
+	 
+	        var $pingingView = $("#paging");
+	        
+	        var html = "";
+	        
+	        if(prev > 0)
+	            html += "<a href=# id='prev'><</a> ";
+	        
+	        var href = '';
+	        for(var i=first; i <= last; i++){
+// 	        	href = href = '/board/list/'+i;
+	        	href = '#';
+// 	            html += "<a  id=" + i + ">" + i + "</a> ";
+	            html += "<a href="+href +  " id=" + i + ">" + i + "</a> ";
+	        }
+	        
+	        if(last < totalPage)
+	            html += "<a href=# id='next'>></a>";
+	        
+	        $(".pagination-page").html(html);    // 페이지 목록 생성
+	        $(".pagination-page").html(html);    // 페이지 목록 생성
+	        $(".pagination-page a").css("color", "black");
+	        $(".pagination-page a#" + currentPage).css({"text-decoration":"none", 
+	                                           "color":"red", 
+	                                           "font-weight":"bold"});    // 현재 페이지 표시
+	                                           
+	        $(".pagination-page a").click(function(){
+	            
+	            var $item = $(this); 
+	            var $id = $item.attr("id");
+	            var selectedPage = $item.text();
+	            
+	            if($id == "next")    selectedPage = next;
+	            if($id == "prev")    selectedPage = prev;
+	            console.log("클릭했다"+selectedPage);
+	            
+	          
+
+
+	            paging(totalData, dataPerPage, pageCount, selectedPage);
+	        });
+	                                           
+	    }
+	    
+	    $("document").ready(function(){        
+	        paging(totalData, dataPerPage, pageCount, 1);
+	    });
 </script>
 </head>
 <body>
@@ -136,7 +239,7 @@
 													<th scope="col">번호</th>
 													<th scope="col">제목</th>
 													<th scope="col">조회수</th>
-													<th scope="col">등록일</th>
+								 					<th scope="col">등록일</th>
 												</tr>
 											</thead>
 												<c:forEach items="${boardData}" var="boardData">
@@ -144,7 +247,7 @@
 												<!-- ngRepeat: data in vm.noticeResult -->
 													<tr>
 														<td>${boardData.no}</td>
-														<td class="txt"><a href="#/portal/faq/noticeDetail/27">${boardData.title}</a></td>
+														<td class="txt"><a href="/board/list/listView/${boardData.rownum}">${boardData.title}</a></td>
 														<td>${boardData.viewcnt}</td>
 														<td>${boardData.writedate}</td>
 													</tr>
@@ -157,55 +260,15 @@
 									<!-- paginate -->
 									<div class="paginate mt20">
 										<div class="paging">
-											<ul uib-pagination="" boundary-links="true"
-												num-pages="numpages" total-items="vm.pageTotal"
-												max-size="vm.maxSize" ng-model="vm.pageInfo.pageNum"
-												class="pagination-sm ng-pristine ng-untouched ng-valid ng-isolate-scope pagination ng-not-empty"
+											<ul class="pagination-sm ng-pristine ng-untouched ng-valid ng-isolate-scope pagination ng-not-empty"
 												previous-text="‹" next-text="›" rotate="false"
 												first-text="«" last-text="»"
 												ng-change="vm.pageChage($event)">
 												<!-- ngIf: ::boundaryLinks -->
-												<li ng-if="::boundaryLinks"
-													ng-class="{disabled: noPrevious()||ngDisabled}"
-													class="pagination-first ng-scope disabled"><a href=""
-													ng-click="selectPage(1, $event)"
-													ng-disabled="noPrevious()||ngDisabled"
-													uib-tabindex-toggle="" class="ng-binding"
-													disabled="disabled" tabindex="-1">«</a></li>
-												<!-- end ngIf: ::boundaryLinks -->
-												<!-- ngIf: ::directionLinks -->
-												<li ng-if="::directionLinks"
-													ng-class="{disabled: noPrevious()||ngDisabled}"
-													class="pagination-prev ng-scope disabled"><a href=""
-													ng-click="selectPage(page - 1, $event)"
-													ng-disabled="noPrevious()||ngDisabled"
-													uib-tabindex-toggle="" class="ng-binding"
-													disabled="disabled" tabindex="-1">‹</a></li>
-												<!-- end ngIf: ::directionLinks -->
-												<!-- ngRepeat: page in pages track by $index -->
-												<li ng-repeat="page in pages track by $index"
-													ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}"
-													class="pagination-page ng-scope active"><a href=""
-													ng-click="selectPage(page.number, $event)"
-													ng-disabled="ngDisabled&amp;&amp;!page.active"
-													uib-tabindex-toggle="" class="ng-binding">1</a></li>
+												<li class="pagination-page">
+												</li>
 												<!-- end ngRepeat: page in pages track by $index -->
 												<!-- ngIf: ::directionLinks -->
-												<li ng-if="::directionLinks"
-													ng-class="{disabled: noNext()||ngDisabled}"
-													class="pagination-next ng-scope disabled"><a href=""
-													ng-click="selectPage(page + 1, $event)"
-													ng-disabled="noNext()||ngDisabled" uib-tabindex-toggle=""
-													class="ng-binding" disabled="disabled" tabindex="-1">›</a></li>
-												<!-- end ngIf: ::directionLinks -->
-												<!-- ngIf: ::boundaryLinks -->
-												<li ng-if="::boundaryLinks"
-													ng-class="{disabled: noNext()||ngDisabled}"
-													class="pagination-last ng-scope disabled"><a href=""
-													ng-click="selectPage(totalPages, $event)"
-													ng-disabled="noNext()||ngDisabled" uib-tabindex-toggle=""
-													class="ng-binding" disabled="disabled" tabindex="-1">»</a></li>
-												<!-- end ngIf: ::boundaryLinks -->
 											</ul>
 
 										</div>
@@ -222,7 +285,7 @@
 							</div>
 						</div>
 						<!--//container-->
-
+<div id="paging"></div>
 					</div>
 					<!--//cBody-->
 				</div>

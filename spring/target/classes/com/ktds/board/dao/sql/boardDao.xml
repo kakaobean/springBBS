@@ -23,8 +23,44 @@
 		
 	</insert>
 	
-	<select id="readBoardList" resultType="hashmap">
-		select * from public.board order by writedate desc;
+	<select id="readBoardList" parameterType="_int" resultType="hashmap">
+	select	T201.*
+			from	(
+				select	ceil(row_number() over()/10::float) rownum,
+					row_number() over(),
+					T101.* 
+				from	(
+					select	* 
+					from	public.board 
+					order by writedate desc
+					) T101
+				) T201
+				where rownum = #{id}
+	</select>
+	
+<!-- 	전체 row 수 가져오기 -->
+	<select id="readAllCnt" resultType="_int">
+		select	count(no) as cnt
+		from	public.board
+	</select>
+	
+	<select id="readViewData" parameterType="_int" resultType="com.ktds.board.vo.BoardVO">
+<!-- 		select	title, -->
+<!-- 				body, -->
+<!-- 				viewcnt viewCnt, -->
+<!-- 				writedate writeDate -->
+<!-- 		 from public.board where no = #{id}; -->
+		select	T201.*
+			from	(
+				select	row_number() over() rownum,
+					T101.* 
+				from	(
+					select	* 
+					from	public.board 
+					order by writedate desc
+					) T101
+				) T201
+			where	T201.rownum = #{id};
 	</select>
 	
 </mapper>
