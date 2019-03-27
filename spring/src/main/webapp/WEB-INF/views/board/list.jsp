@@ -64,21 +64,7 @@
 	    function paging(totalData, dataPerPage, pageCount, currentPage){
 	         
 	        console.log("currentPage : " + currentPage);
-	        $.ajax({
-                
-                type : "GET",
-                url : "/board/list/"+currentPage,
-                dataType : "text",
-                error : function(){
-                    alert('통신실패!!');
-                },
-                success : function(data){
-                	console.log(data);
-//                     $("html").html(data) ;
-// 	        $("tbody").html(document.querySelectorAll("tbody")[0].innerHTML);
-// 					console.log(${boardData});
-                }
-            });
+	   
 	        // 총 페이지 수
 	        var totalPage = Math.ceil(totalData/dataPerPage);    
 	        // 페이지 그룹
@@ -109,8 +95,8 @@
 	        for(var i=first; i <= last; i++){
 // 	        	href = href = '/board/list/'+i;
 	        	href = '#';
-// 	            html += "<a  id=" + i + ">" + i + "</a> ";
-	            html += "<a href="+href +  " id=" + i + ">" + i + "</a> ";
+	            html += "<a  id=" + i + ">" + i + "</a> ";
+// 	            html += "<a href="+href +  " id=" + i + ">" + i + "</a> ";
 	        }
 	        
 	        if(last < totalPage)
@@ -122,6 +108,32 @@
 	        $(".pagination-page a#" + currentPage).css({"text-decoration":"none", 
 	                                           "color":"red", 
 	                                           "font-weight":"bold"});    // 현재 페이지 표시
+	                 
+     $.ajax({
+                
+                type : "GET",
+                url : "/ajaxSuccess/"+currentPage,
+//                 dataType : "text",
+                error : function(){
+                    alert('통신실패!!');
+                },
+                success : function(data){
+                	var html = "";
+    				for(var i = 0; i < data.length; i++){
+    					console.log(i);
+    					html += "<tr><td>"+data[i].no+"</td>"; 
+    					html += "<td>"+data[i].title+"</td>"; 
+    					html += "<td>"+data[i].viewcnt+"</td>"; 
+    					html += "<td>"+data[i].writedate+"</td></tr>";
+    					
+    				}
+    				$("#trTest").html(html);
+                	console.log(data);
+//                     $("html").html(data) ;
+// 	        $("tbody").html(document.querySelectorAll("tbody")[0].innerHTML);
+// 					console.log(${boardData});
+                }
+            });	                                           
 	                                           
 	        $(".pagination-page a").click(function(){
 	            
@@ -138,16 +150,18 @@
 
 	            paging(totalData, dataPerPage, pageCount, selectedPage);
 	        });
-	                                           
 	    }
 	    
 	    $("document").ready(function(){        
 	        paging(totalData, dataPerPage, pageCount, 1);
 	    });
+
 </script>
 </head>
 <body>
 	<div>
+	
+	
 		<!-- 
    Bigdata Intelligence Platform version 1.0
    
@@ -236,24 +250,22 @@
 											</colgroup>
 											<thead>
 												<tr>
-													<th scope="col">번호</th>
+													<th scope="col">번호</th> 
 													<th scope="col">제목</th>
 													<th scope="col">조회수</th>
 								 					<th scope="col">등록일</th>
 												</tr>
 											</thead>
-												<c:forEach items="${boardData}" var="boardData">
-											<tbody>
+											<tbody id="trTest"> 
 												<!-- ngRepeat: data in vm.noticeResult -->
-													<tr>
-														<td>${boardData.no}</td>
-														<td class="txt"><a href="/board/list/listView/${boardData.rownum}">${boardData.title}</a></td>
-														<td>${boardData.viewcnt}</td>
-														<td>${boardData.writedate}</td>
-													</tr>
+<!-- 													<tr> -->
+<%-- 														<td>${boardData.no}</td> --%>
+<%-- 														<td class="txt"><a href="/board/list/listView/${boardData.rownum}">${boardData.title}</a></td> --%>
+<%-- 														<td>${boardData.viewcnt}</td> --%>
+<%-- 														<td>${boardData.writedate}</td> --%>
+<!-- 													</tr> -->
 												<!-- end ngRepeat: data in vm.noticeResult -->
 											</tbody>
-												</c:forEach>
 										</table>
 									</div>
 
