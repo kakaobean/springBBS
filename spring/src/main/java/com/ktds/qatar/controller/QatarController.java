@@ -1,7 +1,13 @@
 package com.ktds.qatar.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.JSONArray;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,43 +15,62 @@ import org.jsoup.select.Elements;
 
 public class QatarController {
 	
+	JSONObject jsonOb = new JSONObject();
+	JSONArray jsonAr = new JSONArray();
+	Document doc = null;
+	
+	static QatarController qatar = new QatarController();
+	
 	public static void main(String[] args) {
-//		try {
-//			Connection.Response response = Jsoup.connect("http://careers.qatarairways.com/qatarairways/vacancysearch.aspx")
-//					.method(Connection.Method.GET)
-//					.execute();
-//			Document document = response.parse();
-//			String html = document.html();
-//			String text = document.text();
-//			System.out.println(html);
-//		}catch(IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-		Document doc = null;
+		
+		qatar.parser();
+//		qatar.crossCheck();
+		
+	}
+
+	
+	public void crossCheck() {
+		Element td =null;
+		String[] aa;
+		String[] bb = {"dd","44","4"};
+		List cc = new ArrayList<String>();
+		qatar.jsoup();
+		Elements tr = doc.select("table tr");
+		for(int i = 1; i<tr.size(); i++) {
+			td = tr.get(i);
+			Elements tdData = td.select("td");
+			aa = tdData.get(0).text().split(" -");
+//			System.out.println(tdData.get(0).text().split("-"));
+			cc.add(aa[0]);
+			System.out.println(aa[0]);
+		}
+		System.out.println(cc);
+	}
+	
+	// job link, job function parsing,  return Type : json
+	public void parser() {
+		qatar.jsoup();
+		Elements tr = doc.select("table tr");
+		for(int i = 1; i<tr.size(); i++) {
+			Element td = tr.get(i);
+			if(td != null) {
+				jsonOb = new JSONObject();
+				Elements tdData = td.select("td"); 
+				Elements href = td.select("td a");  
+				jsonOb.put("Job link", href.first().attr("abs:href"));
+				jsonOb.put("Job function", tdData.get(2).text());
+				jsonAr.add(jsonOb);
+//				System.out.println(jsonOb);    
+			}
+		}
+		System.out.println(jsonAr);    // 추후에 front-end 로 내려서 Job function 이 Cabin Crew 인것만 추출
+	}
+	
+	public void jsoup() {
 		try {
-//			doc = Jsoup.connect("http://careers.qatarairways.com/qatarairways/vacancysearch.aspx").get();
-			doc = Jsoup.connect("http://localhost:8080/board/list/2").get();
+			doc = Jsoup.connect("http://localhost:8080/board/ajaxTest").get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-//		Elements el = doc.select("section tr");
-		Elements el = doc.select(".ah_item .ah_k");
-		
-		
-		Element e2 = doc.select(".ah_l").get(0);
-		Elements e3 = e2.select("li");
-//		System.out.println(e3.get(1).text());     여기랑  밑에랑 비교
-//		System.out.println(e3.get(3).text());
-		int a = 1;
-		for(Element e4 : e3) {
-			Elements e5 = e4.select(".ah_k");
-//			System.out.println(e5+" :: " +a);
-//			System.out.println("e3::"+e3);
-//			System.out.println("e4::"+e4);
-			a++;
-		}
-//		System.out.println(e3);
-		
 	}
 }
