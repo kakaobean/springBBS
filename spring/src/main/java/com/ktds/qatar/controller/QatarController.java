@@ -23,12 +23,12 @@ public class QatarController {
 	
 	public static void main(String[] args) {
 		
-		qatar.parser();
+		qatar.parser(); 
 //		qatar.crossCheck();
 		
 	}
 
-	
+
 	public void crossCheck() {
 		Element td =null;
 		String[] aa;
@@ -48,12 +48,13 @@ public class QatarController {
 	}
 	
 	// job link, job function parsing,  return Type : json
-	public void parser() {
+	public void parser() { 
 		qatar.jsoup();
 		Elements tr = doc.select("table tr");
+		System.out.println(tr);
 		for(int i = 1; i<tr.size(); i++) {
 			Element td = tr.get(i);
-			if(td != null) {
+			if(td != null) { 
 				jsonOb = new JSONObject();
 				Elements tdData = td.select("td"); 
 				Elements href = td.select("td a");  
@@ -63,12 +64,14 @@ public class QatarController {
 //				System.out.println(jsonOb);    
 			}
 		}
-		System.out.println(jsonAr);    // 추후에 front-end 로 내려서 Job function 이 Cabin Crew 인것만 추출
+//		System.out.println(jsonAr);    // 추후에 front-end 로 내려서 Job function 이 Cabin Crew 인것만 추출
 	}
-	
+	 
 	public void jsoup() {
 		try {
-			doc = Jsoup.connect("http://localhost:8080/board/ajaxTest").get();
+			String url = "http://localhost:8080/board/list";
+//			String url = "http://localhost:8080/board/ajaxTest";
+			doc = Jsoup.connect(url).get();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
