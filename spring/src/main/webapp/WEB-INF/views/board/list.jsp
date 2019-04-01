@@ -119,6 +119,12 @@
                 },
                 success : function(data){
                 	var html = "";
+                	var dataTemp = null;
+                	dataTemp = data;
+                	console.log("dataTemp");
+                	console.log(dataTemp);
+                	console.log("data");
+                	console.log(data);
     				for(var i = 0; i < data.length; i++){
     					console.log(i);
     					html += "<tr><td>"+data[i].no+"</td>"; 
@@ -128,7 +134,8 @@
     					
     				}
     				$("#trTest").html(html);
-                	console.log(data);
+    				
+                	console.log(html);
 //                     $("html").html(data) ;
 // 	        $("tbody").html(document.querySelectorAll("tbody")[0].innerHTML);
 // 					console.log(${boardData});
