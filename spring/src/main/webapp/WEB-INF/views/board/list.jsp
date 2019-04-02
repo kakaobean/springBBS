@@ -129,8 +129,8 @@
     					console.log(i);
     					html += "<tr><td>"+data[i].no+"</td>"; 
     					html += "<td>"+data[i].title+"</td>"; 
-    					html += "<td>"+data[i].viewcnt+"</td>"; 
-    					html += "<td>"+data[i].writedate+"</td></tr>";
+    					html += "<td>"+data[i].viewCnt+"</td>"; 
+    					html += "<td>"+data[i].writeDate+"</td></tr>";
     					
     				}
     				$("#trTest").html(html);

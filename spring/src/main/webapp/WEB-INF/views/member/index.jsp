@@ -418,31 +418,9 @@
 
 								<div class="soluitonBox">
 									<div class="soluiton">
-										<p class="soluiton_logo">
-											<img src="../../assets/img/portal/main/logo_trip.png"
-												alt="TrIP (관광분석솔루션)">
-										</p>
-										<p class="soluiton_bline"></p>
-										<ul class="sol-cont">
-											<li class="sol-icon-wrap"><img
-												src="../../assets/img/portal/main/trip_icon.png"
-												alt="TrIP (관광분석솔루션)"></li>
-											<li>
-												<p class="soluiton_name">전국 관광분석</p>
-												<p class="soluiton_stxt">
-													BigData 기반한<br>관광, 축제 정책수립 / 수요예측 및<br>관광객 유동인구
-													분석 / 레포트
-												</p>
-												<p class="btn-sol-detalil">
-													<a href="#/portal/intro/tour" ui-sref="portal.intro.tour"
-														class="btn-act">서비스소개</a>
-												</p>
-											</li>
-										</ul>
-										<p class="sol-btn-wrap">
-											<a href="" class="sol-btn1"><strong>TrIP</strong>
-												바로가기</a>
-										</p>
+<!-- 										<img src="https://bigsight.kt.com/bdip/assets/img/portal/main/grip_icon.png"> -->
+										<img style="width:300px;"src="/board/ajaxTest">
+<%-- 										<img src="<c:url value="/board/ajaxTest"/>"/> --%>
 									</div>
 
 									<div class="soluiton">

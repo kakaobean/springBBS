@@ -1,18 +1,20 @@
 package com.ktds.board.vo;
 
 public class BoardVO {
+	private String no;
 	private String title;
 	private String body;
 	private String writeDate;
 	private String viewCnt;
-	private String rownum;
 
-	public String getRownum() {
-		return rownum;
+	
+	
+	public String getNo() {
+		return no;
 	}
 
-	public void setRownum(String rownum) {
-		this.rownum = rownum;
+	public void setNo(String no) {
+		this.no = no;
 	}
 
 	public String getWriteDate() {

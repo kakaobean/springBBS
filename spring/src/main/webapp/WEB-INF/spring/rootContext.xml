@@ -5,12 +5,20 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	  	<property name="driverClassName" value="org.postgresql.Driver"/>
-	  	<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/>
-	  	<property name="username" value="postgres"/>
-	  	<property name="password" value="1161"/>
+	<bean	id="dataSource"
+			class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		<property name="username" value="YOUNGBIN"/>		
+		<property name="password" value="youngbin"/>		
 	</bean>
+	
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 	  	<property name="driverClassName" value="org.postgresql.Driver"/> -->
+<!-- 	  	<property name="url" value="jdbc:postgresql://localhost:5432/postgres"/> -->
+<!-- 	  	<property name="username" value="postgres"/> -->
+<!-- 	  	<property name="password" value="1161"/> -->
+<!-- 	</bean> -->
 
 	<!-- MyBatis 설정 -->
 	<!-- myBatis가 db에 접속 할 수 있도록 도와주는 설정 -->

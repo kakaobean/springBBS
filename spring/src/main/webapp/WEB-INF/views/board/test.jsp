@@ -15,10 +15,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <div id="wrapper" style="margin-top: 20px;"><input id="fileUpload" multiple="multiple" type="file"/> 
 <div id="image-holder"></div>
-<div>
-	테스트중
-	${image}
-</div>
 </div>
 
 <script>

@@ -22,6 +22,7 @@ public class BoardDaoImpl extends SqlSessionDaoSupport implements BoardDao{
 //		System.out.println(test);
 //		System.out.println(getSqlSession().selectList("sample.readBoardList"));
 //		return getSqlSession().selectList("sample.readBoardList");
+		System.out.println("==========="+getSqlSession().selectList("sample.readBoardList", id));
 		return getSqlSession().selectList("sample.readBoardList", id);
 	}
 
