@@ -419,7 +419,7 @@
 								<div class="soluitonBox">
 									<div class="soluiton">
 <!-- 										<img src="https://bigsight.kt.com/bdip/assets/img/portal/main/grip_icon.png"> -->
-										<img style="width:300px;"src="/board/ajaxTest">
+										<img style="width:300px;"src="/board/getImage">
 <%-- 										<img src="<c:url value="/board/ajaxTest"/>"/> --%>
 									</div>
 

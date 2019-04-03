@@ -373,9 +373,9 @@
 							<!-- end ngRepeat: menu in pvm.menuList -->
 							<div class="tit-3" ng-repeat="menu in pvm.menuList">
 								<a ng-class="portalMenuIndex==3 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(3,menu.routeState);"
+									href="/chart"
 									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">서비스 정책</span></a>
+									ng-bind="menu.title" class="ng-binding">차트</span></a>
 								<div class="twoD">
 
 									<!-- ngRepeat: tab in menu.tabList -->
@@ -423,7 +423,7 @@
 								<a ng-class="portalMenuIndex==4 ? 'g-menu on' : 'g-menu'"
 									href="/board/list"
 									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">고객센터</span></a>
+									ng-bind="menu.title" class="ng-binding">게시판</span></a>
 								<div class="twoD">
 
 									<!-- ngRepeat: tab in menu.tabList -->
