@@ -10,11 +10,11 @@
 		TB_BOARD
 	</select>
 	<select id="validMember" parameterType="com.ktds.member.vo.MemberVO" resultType="_int">
-		select count(*) from public.member where eamil =  #{id} and password = #{pw1}
+		select count(*) from member where eamil =  #{id} and password = #{pw1}
 	</select>
 	
 	<insert id="insertMember" parameterType="com.ktds.member.vo.MemberVO">
-		INSERT INTO public.member(
+		INSERT INTO member(
             eamil,
             password,
             nickname
@@ -23,7 +23,7 @@
     		#{id},
     		#{pw1},
     		#{name}
-		);
+		)
 		
 	</insert>
 </mapper>

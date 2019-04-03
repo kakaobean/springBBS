@@ -38,7 +38,6 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/writeAction", method = RequestMethod.POST)
-	@ResponseBody
 	public String writeAction(BoardVO boardVO) {
 
 		String param = boardVO.getTitle();
@@ -53,7 +52,6 @@ public class BoardController {
 	public List ajaxSuccess(@PathVariable int id) {
 		System.out.println("성공" + id);
 		List<BoardVO> boardList = boardService.readBoardList(id);
-//		return null;
 		return boardList;
 	}
 
@@ -65,56 +63,41 @@ public class BoardController {
 
 	}
 	
-	@RequestMapping(value = "/board/ajaxTest", method = RequestMethod.GET)
-	public void ajaxTest22(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException{
+	@RequestMapping(value = "/board/getImage", method = RequestMethod.GET)
+	public void getImage(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		
 		response.setContentType("image/jpg");
 
-		byte[] by = new byte[100000]; //한번에 읽어올 파일크기 1024 바이트
+		byte[] by = new byte[1024]; //한번에 읽어올 파일크기 1024 바이트
 		//출력을위한 OutputStream 객체
 
 		ServletOutputStream out = response.getOutputStream();
 		
 		try {
-
 			//이미지 주소 저장
 			String imagePath = "C:/file/Jellyfish.jpg";
 			
 			//inputStream : 파일을 1바이트씩 읽어옴
 			//BufferedInputStream : inputStream객체로 버퍼객체를 생성
-			
 			BufferedInputStream in = new BufferedInputStream(new FileInputStream(imagePath));
 
 			//버퍼(in)에 있는 데이터를 1024바이트(by) 만큼 읽어오고 데이터가 없을경우 반복문 종료
-			System.out.println("1111111111111111111111111111");
-			while(in.read(by) != -1 ) {
-				System.out.println(in.read(by));
+			while(in.read(by) != -1 ) {  //  != 0 일때 무한반복
 				out.write(by); //1024바이트씩 출력
 			}
-//			if(in.read(by) != 0) {
-//				out.write(by); //1024바이트씩 출력
-//			}
-			System.out.println("dddddddddddddddddd");
 			in.close();
 			out.close();
 		} catch (Exception e) {
 			// TODO: handle exception
-
 		}
-		System.out.println("============================");
 	}
 
 	
-//	@RequestMapping(value = "/board/ajaxTest", method = RequestMethod.GET)
-//	public String ajaxTest22(Model model) throws IOException {
-//		Image image1 = null;
-//		File sourceimage = new File("C:/file/Jellyfish.jpg");
-//        image1 = ImageIO.read(sourceimage);
-//        System.out.println(image1+"=========");
-//        
-//        model.addAttribute("image", sourceimage);
-//		return "/board/ajaxTest";
-//	}
+	@RequestMapping(value = "/board/ajaxTest", method = RequestMethod.GET)
+	public String ajaxTest22(Model model) throws IOException {
+		
+		return "/board/ajaxTest";
+	}
 
 
 }

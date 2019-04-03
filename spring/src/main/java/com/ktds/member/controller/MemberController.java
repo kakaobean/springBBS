@@ -47,7 +47,7 @@ public class MemberController {
 		logger.info("::::: not loginAction!{}.", memberService.validMember(memberVO)); 
 		System.out.println(memberVO.getId() + memberVO.getPw1() + memberVO.getName());
 		model.addAttribute("loginValid", "false");
-		return "member/login";
+		return "redirect:member/login";
 	}
 	@RequestMapping(value="/member/regist", method = RequestMethod.GET)
 	public String regist() {
