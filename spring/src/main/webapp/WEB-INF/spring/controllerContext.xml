@@ -12,6 +12,7 @@
 		<property name="boardService" ref="boardService"></property>
 	</bean>
 	<bean id="chartController" class="com.ktds.chart.controller.ChartController">
+		<property name="chartService" ref="chartService"></property>
 	</bean>
 </beans>
- 
+  

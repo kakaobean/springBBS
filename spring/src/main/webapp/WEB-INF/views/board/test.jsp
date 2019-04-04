@@ -17,7 +17,7 @@
 <div id="image-holder"></div>
 </div>
 
-<script>
+<script>a
 $(document).ready(function() {
         $("#fileUpload").on('change', function() {
           //Get count of selected files

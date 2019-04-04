@@ -7,9 +7,9 @@
 	
 	<mvc:annotation-driven />      <!--  url 과 관련됨  -->
 	
-	<mvc:resources mapping="/static/**" location="/WEB-INF/static/"/> <!--  url 과 관련됨  -->
+	<mvc:resources mapping="/**" location="/WEB-INF/"/> <!--  url 과 관련됨  -->
+<!-- 	<mvc:resources mapping="/views/**" location="/WEB-INF/views/"/>  url 과 관련됨  -->
 <!-- 	<mvc:resources mapping="/img/*" location="/img/"/>  url 과 관련됨  -->
-
 
 
 	<bean id="viewResolver"

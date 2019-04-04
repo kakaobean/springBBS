@@ -47,7 +47,6 @@
 		
 		
 	});
- 
 	    var totalData = ${readAllCnt};    // 총 데이터 수
 	    var currentPage = 0;
 	    var dataPerPage = 10;    // 한 페이지에 나타낼 데이터 수
@@ -153,7 +152,6 @@
 	            console.log("클릭했다"+selectedPage);
 	            
 	          
-
 
 	            paging(totalData, dataPerPage, pageCount, selectedPage);
 	        });

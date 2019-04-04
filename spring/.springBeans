@@ -12,8 +12,10 @@
 		<config>src/main/webapp/WEB-INF/spring/memberContext.xml</config>
 		<config>src/main/webapp/WEB-INF/spring/rootContext.xml</config>
 		<config>src/main/resource/mybatis/mybatis.xml</config>
+		<config>src/main/webapp/WEB-INF/spring/chartContext.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring/boardContext.xml</config>
 	</autoconfigs>
 	<configSets>
 	</configSets>

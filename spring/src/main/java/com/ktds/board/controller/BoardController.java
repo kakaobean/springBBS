@@ -98,6 +98,11 @@ public class BoardController {
 		
 		return "/board/ajaxTest";
 	}
+	@RequestMapping(value = "/board/test", method = RequestMethod.GET)
+	public String ajaxTest22213(Model model) throws IOException {
+		
+		return "/board/test";
+	}
 
 
 }

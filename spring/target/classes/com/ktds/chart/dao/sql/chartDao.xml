@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sampleTest">
+	
+	<select id="readList"  resultType="com.ktds.chart.vo.ChartVO">
+		
+		SELECT  UPJONG_L_NM upNm, 
+		        COUNT(UPJONG_L_CD) upCnt
+		FROM    (
+		        SELECT  T1.UPJONG_L_CD,
+		                T1.UPJONG_L_NM,
+		                to_char(to_date(T2.up_date, 'mm-dd-yyyy'), 'yyyymm') DAY
+		        FROM    TRA_CODE T1
+		        INNER JOIN TRA_DATE T2
+		        ON T1.UPJONG_S_CD = T2.UPJONG_S_CD
+		        ORDER BY UPJONG_L_CD ASC
+		        ) T2
+		WHERE   DAY = '201806'
+		GROUP BY UPJONG_L_NM     
+	</select>
+	
+	
+</mapper>

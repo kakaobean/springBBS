@@ -18,77 +18,11 @@
 	type="text/javascript"></script>
 <script src="<c:url value="/static/js/Chart.min.js"/>"
 	type="text/javascript"></script>
-
-<script type="text/javascript">
-
-
-	$("document").ready(function() {
-		
-	});
-	window.chartColors = {
-			red: 'rgb(255, 99, 132)',
-			orange: 'rgb(255, 159, 64)',
-			yellow: 'rgb(255, 205, 86)',
-			green: 'rgb(75, 192, 192)',
-			blue: 'rgb(54, 162, 235)',
-			purple: 'rgb(153, 102, 255)',
-			grey: 'rgb(201, 203, 207)'
-		};
-	var color = Chart.helpers.color;
-	var barChartData = {
-		labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-		datasets: [{
-			label: 'Dataset 1',
-			backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
-			borderColor: window.chartColors.red,
-			borderWidth: 1,
-			data: [
-				10,
-				30,
-				50,
-				100,
-				70,
-				50,
-				60
-			]
-		}, {
-			label: 'Dataset 2',
-			backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
-			borderColor: window.chartColors.blue,
-			borderWidth: 1,
-			data: [
-				100,
-				70,
-				50,
-				60,
-				10,
-				30,
-				50
-				
-			]
-		}]
-
-	};
-	window.onload = function() {
-		var ctx = document.getElementById('canvas').getContext('2d');
-		window.myBar = new Chart(ctx, {
-			type: 'bar',
-			data: barChartData,
-			options: {
-				responsive: true,
-				legend: {
-					position: 'top',
-				},
-				title: {
-					display: true,
-					text: 'Chart.js Bar Chart'
-				}
-			}
-		});
-
-	};
-</script>
+<script src="<c:url value="/views/chart/js/chartController.js"/>"
+	type="text/javascript"></script>
 </head>
+
+
 <body>
 	<div>
 		<div>
@@ -228,40 +162,40 @@
 																class="apl_dashboard_search ng-pristine ng-untouched ng-valid ng-not-empty">
 																	<option value="">::연월선택::</option>
 																	<!-- ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201902" class="ng-binding ng-scope" style="">2019년02월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201901" class="ng-binding ng-scope">2019년01월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201812" class="ng-binding ng-scope">2018년12월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201811" class="ng-binding ng-scope">2018년11월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201810" class="ng-binding ng-scope">2018년10월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201809" class="ng-binding ng-scope">2018년09월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201808" class="ng-binding ng-scope">2018년08월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201807" class="ng-binding ng-scope">2018년07월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201806" class="ng-binding ng-scope">2018년06월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201805" class="ng-binding ng-scope">2018년05월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201804" class="ng-binding ng-scope">2018년04월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
-																	<option ng-repeat="item in vm.yearMonthInfoList"
+																	<option  
 																		value="201803" class="ng-binding ng-scope">2018년03월</option>
 																	<!-- end ngRepeat: item in vm.yearMonthInfoList -->
 															</select>
@@ -272,10 +206,10 @@
 												</table>
 
 												<!-- search_button -->
-												<div class="button">
-													<a href="" class="btn1 posRt"
-														ng-click="vm.doSearch(vm.search);">조회</a>
+												<div class="button" >
+													<a id="doSearch"class="btn1 posRt">조회</a>
 												</div>
+												
 												<!-- //search_button -->
 											</div>
 											<div id="tab0">
@@ -292,7 +226,7 @@
 															<ul>
 																<li>
 																	<div class="graph" style="height: 230px;">
-																		<div style="width: 995px;">
+																		<div style="width: 995px;" id="canvasReset">
 																			<iframe class="chartjs-hidden-iframe"
 																				style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
 																			<canvas height="176" width="995" id="canvas"
