@@ -3,7 +3,9 @@ package com.ktds.chart.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.chart.service.ChartService;
@@ -33,11 +35,11 @@ public class ChartController {
 		return "/chart/main";
 	}
 	
-	@RequestMapping(value="/test")
+	@RequestMapping(value="/test/{baseYm}", method = RequestMethod.GET)
 	@ResponseBody
-	public List chartGet() {
+	public List chartGet(@PathVariable int baseYm) {
 		
-		List<ChartVO> listData = chartService.test();
+		List<ChartVO> listData = chartService.test(baseYm);
 		System.out.println("호출");
 		return listData;
 	}

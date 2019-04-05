@@ -2,6 +2,9 @@
  * 
  */
 $("document").ready(function() {
+	var baseYm = "201902"
+	$("#rank_year")[0][1].selected = true;
+	traUpjong(baseYm);
 	
 	window.chartColors = {
 			red: 'rgb(255, 99, 132)',
@@ -35,15 +38,19 @@ $("document").ready(function() {
 		traUpjong(baseYm);
 		
 	});
+	
 // 업종 소분류별 cnt
-var traUpjong = function(baseYm){
+//var traUpjong = function(baseYm){
+	function traUpjong(baseYm){
     $.ajax({
         type : "GET",
-        url : "/test",
+        url : "/test/" + baseYm,
         error : function(){
             alert('통신실패!!');
         },
         success : function(data){
+        	barChartData.datasets[0].data = [];
+        	barChartData.labels = [];
      	   for(var i = 0; i < data.length; i++){
      		   barChartData.datasets[0].data.push(data[i].upCnt);
      		   barChartData.labels.push(data[i].upNm);
@@ -52,6 +59,7 @@ var traUpjong = function(baseYm){
         }
     });
 }
+	
 var traUpjongFn = function(){
 	$("#canvas").remove();
 	$("#canvasReset").html('<canvas height="176" width="995" id="canvas" style="padding: 10px 0px 0px; display: block; width: 995px; height: 176px;"></canvas>');
@@ -65,9 +73,19 @@ var traUpjongFn = function(){
 					position: 'right',
 				},
 				title: {
-					display: true,
-					text: 'Chart.js Bar Chart'
-				}
+					display: true
+				},
+				tooltips : {
+  					callbacks: {
+	              		title : function(tooltipItems) {
+	              			
+	                		return "sadf";
+	                	},
+	                	label : function(s){
+	                		return "dd";
+	                	}
+  					}
+  				}
 			}
 		});
 }

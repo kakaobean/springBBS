@@ -14,5 +14,8 @@
 	<bean id="chartController" class="com.ktds.chart.controller.ChartController">
 		<property name="chartService" ref="chartService"></property>
 	</bean>
+	<bean id="gisController" class="com.ktds.gis.controller.GisController">
+		
+	</bean>
 </beans>
   

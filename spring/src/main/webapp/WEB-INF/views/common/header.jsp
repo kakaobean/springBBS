@@ -251,11 +251,9 @@
 							</div>
 							<!-- end ngRepeat: menu in pvm.menuList -->
 							<div class="tit-2" ng-repeat="menu in pvm.menuList">
-								<a ng-class="portalMenuIndex==2 ? 'g-menu on' : 'g-menu'"
-									ng-click="portalMenuClick(2,menu.routeState);"
+								<a href="/gis"
 									style="cursor: pointer;" class="g-menu"><span
-									ng-bind="menu.title" class="ng-binding">Intelligence
-										Data Hub</span></a>
+									ng-bind="menu.title" class="ng-binding">GIS</span></a>
 								<div class="twoD">
 
 									<!-- ngRepeat: tab in menu.tabList -->

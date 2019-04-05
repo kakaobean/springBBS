@@ -214,13 +214,13 @@
 											</div>
 											<div id="tab0">
 												<div class="reportpopup body-cont" style="width: 1080px;">
-													<h1 class="ng-binding">전국 생활인구 현황</h1>
+													<h1 class="ng-binding">전국 업종 현황</h1>
 													<!-- {{vm.dashboardSumryAlp}} -->
 													<div class="guideCont">
 														<!-- 타이틀 -->
 														<!-- 전체그래프 -->
 														<div class="titwrap full">
-															<h3 class="tit2">내국인 생활인구</h3>
+															<h3 class="tit2">업종 소분류</h3>
 														</div>
 														<div class="graph-box full mt15">
 															<ul>

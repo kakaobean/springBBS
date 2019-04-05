@@ -6,6 +6,6 @@ import com.ktds.chart.vo.ChartVO;
 
 public interface ChartDao {
 
-	List<ChartVO> test();
+	List<ChartVO> test(int baseYm);
 
 }

@@ -17,9 +17,8 @@ public class ChartServiceImpl implements ChartService{
 	}
 
 	@Override
-	public List<ChartVO> test() {
-
-		return chartDao.test();
+	public List<ChartVO> test(int baseYm) {
+		return chartDao.test(baseYm);
 	}
 
 }

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sampleTest">
 	
-	<select id="readList"  resultType="com.ktds.chart.vo.ChartVO">
+	<select id="readList"  resultType="com.ktds.chart.vo.ChartVO" parameterType="com.ktds.chart.vo.ChartVO">
 		
 		SELECT  UPJONG_L_NM upNm, 
 		        COUNT(UPJONG_L_CD) upCnt
@@ -17,9 +17,21 @@
 		        ON T1.UPJONG_S_CD = T2.UPJONG_S_CD
 		        ORDER BY UPJONG_L_CD ASC
 		        ) T2
-		WHERE   DAY = '201806'
+		WHERE   DAY = #{baseYm}
 		GROUP BY UPJONG_L_NM     
 	</select>
+	
+<!-- 	<select id="readList"  resultType="com.ktds.chart.vo.ChartVO" parameterType="com.ktds.chart.vo.ChartVO"> -->
+<!-- select	t1.* -->
+<!-- from	( -->
+<!-- 	select	title, -->
+<!-- 		body, -->
+<!-- 		to_char(now(),'yyyymm') baseYm -->
+<!-- 	from	board -->
+<!-- 	) t1 -->
+<!-- where	baseYm = '201904' -->
+  
+<!-- 	</select> -->
 	
 	
 </mapper>
