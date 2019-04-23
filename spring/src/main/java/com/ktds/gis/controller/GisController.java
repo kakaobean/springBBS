@@ -12,14 +12,10 @@ public class GisController {
 //	}
 	@RequestMapping(value="/gis")
 	public String gisTest() {
-		return "/gis/examples/bing-tiles";
+		return "/gis/temp";
 	}
 	@RequestMapping(value="/open")
 	public String open() {
 		return "/gis/index";
-	}
-	@RequestMapping(value="/open2")
-	public String open2() {
-		return "/gis/open/index.html";
 	}
 }

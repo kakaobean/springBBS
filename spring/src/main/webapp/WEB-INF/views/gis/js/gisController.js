@@ -1,6 +1,6 @@
-alert("TEST FUNC");
 var map, layer;
 var daumMap = new OpenLayers.Layer.Daum(); // 지도관련lib DaumMap
+var mapnik = new OpenLayers.Layer.OSM(); // 지도관련lib? ollehmap으로 대체할것임
 function init() {
 	map = new OpenLayers.Map('map');
 	layer = new OpenLayers.Layer.OSM("Simple OSM Map");
