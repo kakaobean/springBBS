@@ -110,7 +110,7 @@ ng\:form {
 }
 #map {
 	width: 100%;
-	height: 780px;
+	height: 824px;
 }
 
 .smallmap {
@@ -534,7 +534,7 @@ ng\:form {
 					<!-- 실제 지도 개발시에 min-height 부분을 지우고, 맵화면이 꽉차도록 개발 -->
 
 					<div id="maparea" class="ng-scope"
-						style="height: 777px;">
+						style="height: 824px;">
 
 						<!-- Single map 
 	<div id="canvas_map">	</div>
@@ -588,9 +588,7 @@ ng\:form {
 								<div class="wrap fl">
 									<ul class="js_sido_list">
 										<!-- ngRepeat: item in common.sidoInfoList -->
-										<li ng-repeat="item in common.sidoInfoList" class="ng-scope"
-											style=""><a id="cmpr0_sido_0" href="javascript:;"
-											ng-click="onTargetSidoChange(0, '{&quot;sidoName&quot;:&quot;서울특별시&quot;,&quot;sidoCode&quot;:&quot;11&quot;}', $event)"
+										<li><a id="cmpr0_sido_0" onclick="doSidoSet()"
 											class="ng-binding">서울특별시</a></li>
 										<!-- end ngRepeat: item in common.sidoInfoList -->
 										<li ng-repeat="item in common.sidoInfoList" class="ng-scope">
@@ -1044,12 +1042,15 @@ ng\:form {
 							<!-- lnb-tab -->
 							<div class="lnb-tab">
 								<h3>Map Service</h3>
-								<div class="jsScroll" style="z-index: 1300; height: 735px;">
+								<div class="jsScroll" style="z-index: 1300; height: 783px;">
 									<ul>
 										<!-- ★ tadmin: 행정구역별분석★ -->
 										<li><a href="javascript:;"
 											ng-click="changeToggleView('tadmin');" class="expand"
 											ng-class="{off:tadmin.visibleMenu != true}">◎ 행정구역별분석</a>
+											<button onclick="doSggSet('11')">sggtest</button>
+											<button onclick="doSggSet('26')">sggtest2</button>
+											<button onclick="doAdmdongSet('11680')">admtest</button>
 											<div class="unexpand_cont" ng-show="tadmin.visibleMenu==true">
 												<!-- 조회영역 -->
 												<div class="search-wrap">
@@ -1059,15 +1060,11 @@ ng\:form {
 														<dl>
 															<dt class="tx2">검색조건</dt>
 															<dd ng-class="{blurText:tadmin.tourType == '2'}">
-																<label><input type="radio"
-																	name="tadmin.condType" ng-model="tadmin.condType"
-																	ng-change="changedCondType('행정구역분석', '1', true)"
-																	ng-disabled="tadmin.disabled" value="1"
+																<label><input type="radio" checked="true"
+																	name="tadmin.condType" onclick="searchToggle('1')" value="1"
 																	class="ng-pristine ng-untouched ng-valid ng-not-empty">지역비교</label>
-																<label><input type="radio"
-																	name="tadmin.condType" ng-model="tadmin.condType"
-																	ng-change="changedCondType('행정구역분석', '2', true)"
-																	ng-disabled="tadmin.disabled" value="2"
+																<label><input type="radio" 
+																	name="tadmin.condType" onclick="searchToggle('2')" value="2"
 																	class="ng-pristine ng-untouched ng-valid ng-not-empty">기간비교</label>
 															</dd>
 														</dl>
@@ -1120,9 +1117,9 @@ ng\:form {
 																		<!-- end ngRepeat: item in common.yearMonthInfoList -->
 																	</select>
 																</div>
-																<div class="alp_left_month ng-hide"
+																<div class="alp_left_month ng-hide" id="rightMonth"
 																	ng-show="tadmin.condType == '2'">비교년월</div>
-																<div class="w80 ng-hide"
+																<div class="w80 ng-hide" id="rightMonth2"
 																	ng-show="tadmin.condType == '2'">
 																	<select id="common.month2" ng-model="common.month2"
 																		class="ng-pristine ng-untouched ng-valid ng-not-empty">
@@ -1174,254 +1171,25 @@ ng\:form {
 														<dl>
 															<dt class="tx3">기준지역</dt>
 															<dd>
+																<!-- 시도리스트 가져오기 -->
 																<div class="w120 alp_left_float">
-																	<select
+																	<select onchange="doSggSet(this.value)"
 																		class="alp_select_w ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
-																		ng-model="common.sidoItem"
-																		ng-change="common.fn.onSidoChange('month')" style="">
-																		<option value="">::시도선택::</option>
-																		<!-- ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;서울특별시&quot;,&quot;sidoCode&quot;:&quot;11&quot;}"
-																			class="ng-binding ng-scope" style="">서울특별시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;부산광역시&quot;,&quot;sidoCode&quot;:&quot;26&quot;}"
-																			class="ng-binding ng-scope">부산광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;대구광역시&quot;,&quot;sidoCode&quot;:&quot;27&quot;}"
-																			class="ng-binding ng-scope">대구광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;인천광역시&quot;,&quot;sidoCode&quot;:&quot;28&quot;}"
-																			class="ng-binding ng-scope">인천광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;광주광역시&quot;,&quot;sidoCode&quot;:&quot;29&quot;}"
-																			class="ng-binding ng-scope">광주광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;대전광역시&quot;,&quot;sidoCode&quot;:&quot;30&quot;}"
-																			class="ng-binding ng-scope">대전광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;울산광역시&quot;,&quot;sidoCode&quot;:&quot;31&quot;}"
-																			class="ng-binding ng-scope">울산광역시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;세종특별자치시&quot;,&quot;sidoCode&quot;:&quot;36&quot;}"
-																			class="ng-binding ng-scope">세종특별자치시</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;경기도&quot;,&quot;sidoCode&quot;:&quot;41&quot;}"
-																			class="ng-binding ng-scope">경기도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;강원도&quot;,&quot;sidoCode&quot;:&quot;42&quot;}"
-																			class="ng-binding ng-scope">강원도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;충청북도&quot;,&quot;sidoCode&quot;:&quot;43&quot;}"
-																			class="ng-binding ng-scope">충청북도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;충청남도&quot;,&quot;sidoCode&quot;:&quot;44&quot;}"
-																			class="ng-binding ng-scope">충청남도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;전라북도&quot;,&quot;sidoCode&quot;:&quot;45&quot;}"
-																			class="ng-binding ng-scope">전라북도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;전라남도&quot;,&quot;sidoCode&quot;:&quot;46&quot;}"
-																			class="ng-binding ng-scope">전라남도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;경상북도&quot;,&quot;sidoCode&quot;:&quot;47&quot;}"
-																			class="ng-binding ng-scope">경상북도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;경상남도&quot;,&quot;sidoCode&quot;:&quot;48&quot;}"
-																			class="ng-binding ng-scope">경상남도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
-																		<option ng-repeat="item in common.sidoInfoList"
-																			value="{&quot;sidoName&quot;:&quot;제주특별자치도&quot;,&quot;sidoCode&quot;:&quot;50&quot;}"
-																			class="ng-binding ng-scope">제주특별자치도</option>
-																		<!-- end ngRepeat: item in common.sidoInfoList -->
+																		id = "selectSido"
+																		 style="">
+																		 <option value="">::시군구 선택::</option>
 																	</select>
 																</div>
+																<!-- 시군구 리스트 가져오기 -->
 																<div class="w120 alp_left_float_last">
-																	<select
-																		class="alp_select_w ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched"
-																		ng-model="common.gunguItem"
-																		ng-change="common.fn.onSigunguChange()" style="">
-																		<option value="">::시군구선택::</option>
-																		<!-- ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;강남구&quot;,&quot;gunguCode&quot;:&quot;11680&quot;}"
-																			class="ng-binding ng-scope" style="">강남구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;강동구&quot;,&quot;gunguCode&quot;:&quot;11740&quot;}"
-																			class="ng-binding ng-scope">강동구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;강북구&quot;,&quot;gunguCode&quot;:&quot;11305&quot;}"
-																			class="ng-binding ng-scope">강북구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;강서구&quot;,&quot;gunguCode&quot;:&quot;11500&quot;}"
-																			class="ng-binding ng-scope">강서구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;관악구&quot;,&quot;gunguCode&quot;:&quot;11620&quot;}"
-																			class="ng-binding ng-scope">관악구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;광진구&quot;,&quot;gunguCode&quot;:&quot;11215&quot;}"
-																			class="ng-binding ng-scope">광진구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;구로구&quot;,&quot;gunguCode&quot;:&quot;11530&quot;}"
-																			class="ng-binding ng-scope">구로구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;금천구&quot;,&quot;gunguCode&quot;:&quot;11545&quot;}"
-																			class="ng-binding ng-scope">금천구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;노원구&quot;,&quot;gunguCode&quot;:&quot;11350&quot;}"
-																			class="ng-binding ng-scope">노원구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;도봉구&quot;,&quot;gunguCode&quot;:&quot;11320&quot;}"
-																			class="ng-binding ng-scope">도봉구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;동대문구&quot;,&quot;gunguCode&quot;:&quot;11230&quot;}"
-																			class="ng-binding ng-scope">동대문구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;동작구&quot;,&quot;gunguCode&quot;:&quot;11590&quot;}"
-																			class="ng-binding ng-scope">동작구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;마포구&quot;,&quot;gunguCode&quot;:&quot;11440&quot;}"
-																			class="ng-binding ng-scope">마포구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;서대문구&quot;,&quot;gunguCode&quot;:&quot;11410&quot;}"
-																			class="ng-binding ng-scope">서대문구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;서초구&quot;,&quot;gunguCode&quot;:&quot;11650&quot;}"
-																			class="ng-binding ng-scope">서초구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;성동구&quot;,&quot;gunguCode&quot;:&quot;11200&quot;}"
-																			class="ng-binding ng-scope">성동구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;성북구&quot;,&quot;gunguCode&quot;:&quot;11290&quot;}"
-																			class="ng-binding ng-scope">성북구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;송파구&quot;,&quot;gunguCode&quot;:&quot;11710&quot;}"
-																			class="ng-binding ng-scope">송파구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;양천구&quot;,&quot;gunguCode&quot;:&quot;11470&quot;}"
-																			class="ng-binding ng-scope">양천구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;영등포구&quot;,&quot;gunguCode&quot;:&quot;11560&quot;}"
-																			class="ng-binding ng-scope">영등포구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;용산구&quot;,&quot;gunguCode&quot;:&quot;11170&quot;}"
-																			class="ng-binding ng-scope">용산구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;은평구&quot;,&quot;gunguCode&quot;:&quot;11380&quot;}"
-																			class="ng-binding ng-scope">은평구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;종로구&quot;,&quot;gunguCode&quot;:&quot;11110&quot;}"
-																			class="ng-binding ng-scope">종로구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;중구&quot;,&quot;gunguCode&quot;:&quot;11140&quot;}"
-																			class="ng-binding ng-scope">중구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
-																		<option ng-repeat="item in common.sigunguInfoList"
-																			value="{&quot;gunguName&quot;:&quot;중랑구&quot;,&quot;gunguCode&quot;:&quot;11260&quot;}"
-																			class="ng-binding ng-scope">중랑구</option>
-																		<!-- end ngRepeat: item in common.sigunguInfoList -->
+																	<select id = "selectSgg" onchange="doAdmdongSet(this.value)" 
+																		class="alp_select_w ng-valid ng-not-empty ng-dirty ng-valid-parse ng-touched">
 																	</select>
 																</div>
-																<div class="w120 ng-hide"
-																	ng-show="tadmin.condType == ' '">
-																	<select
-																		class="alp_select_w ng-pristine ng-untouched ng-valid ng-empty"
-																		ng-model="common.dongCode"
-																		ng-change="common.fn.onDongChange()">
-																		<option value="">::읍면동선택::</option>
-																		<!-- ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740515" class="ng-binding ng-scope" style="">강일동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740550" class="ng-binding ng-scope">고덕1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740560" class="ng-binding ng-scope">고덕2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740685" class="ng-binding ng-scope">길동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740690" class="ng-binding ng-scope">둔촌1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740700" class="ng-binding ng-scope">둔촌2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740530" class="ng-binding ng-scope">명일1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740540" class="ng-binding ng-scope">명일2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740520" class="ng-binding ng-scope">상일동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740640" class="ng-binding ng-scope">성내1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740650" class="ng-binding ng-scope">성내2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740660" class="ng-binding ng-scope">성내3동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740570" class="ng-binding ng-scope">암사1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740580" class="ng-binding ng-scope">암사2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740590" class="ng-binding ng-scope">암사3동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740600" class="ng-binding ng-scope">천호1동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740610" class="ng-binding ng-scope">천호2동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
-																		<option ng-repeat="item in common.dongInfoList"
-																			value="11740620" class="ng-binding ng-scope">천호3동</option>
-																		<!-- end ngRepeat: item in common.dongInfoList -->
+																<!-- 읍면동 리스트 가져오기 -->
+																<div class="w120 ng-hide">
+																	<select id = "selectAdmdong"
+																		class="alp_select_w ng-pristine ng-untouched ng-valid ng-empty">
 																	</select>
 																</div>
 															</dd>
@@ -1444,8 +1212,7 @@ ng\:form {
 																					<div class="two">
 																						<label><input type="radio"
 																							name="tadmin.peopleType"
-																							ng-model="tadmin.peopleType" ng-change=""
-																							ng-disabled="" value="in"
+																							checked="true" value="in"
 																							class="ng-pristine ng-untouched ng-valid ng-not-empty">내국인</label>
 																					</div>
 																					<div class="two">
@@ -1462,11 +1229,8 @@ ng\:form {
 																			<dl>
 																				<dt>
 																					<label><input type="checkbox"
-																						name="tadmin.pSex" ng-model="tadmin.pSex"
-																						ng-disabled="tadmin.peopleType == 'out'"
-																						ng-click="share.fn.changeAllCheck('tadmin', 'sex')"
-																						class="ng-pristine ng-untouched ng-valid ng-not-empty"
-																						style="">성별</label>
+																						name="tadmin.pSex" onclick="allCheck('sex')"
+																						class="ng-pristine ng-untouched ng-valid ng-not-empty">성별</label>
 																				</dt>
 																				<dd>
 																					<div class="two">
@@ -1484,9 +1248,7 @@ ng\:form {
 																			<dl>
 																				<dt>
 																					<label><input type="checkbox"
-																						name="tadmin.pDay" ng-model="tadmin.pDay"
-																						ng-disabled=""
-																						ng-click="share.fn.changeAllCheck('tadmin', 'day')"
+																						name="tadmin.pDay" onclick="allCheck('eweek')"
 																						class="ng-pristine ng-untouched ng-valid ng-not-empty"
 																						style="">주중/주말</label>
 																				</dt>
@@ -1506,13 +1268,11 @@ ng\:form {
 																			<dl>
 																				<dt>
 																					<label><input type="checkbox"
-																						name="tadmin.pAge" ng-model="tadmin.pAge"
-																						ng-disabled="tadmin.peopleType == 'out'"
-																						ng-click="share.fn.changeAllCheck('tadmin', 'age')"
+																						name="tadmin.pAge" onclick="allCheck('age')"
 																						class="ng-pristine ng-untouched ng-valid ng-not-empty"
 																						style="">연령대</label>
 																				</dt>
-																				<dd style="height: 96px; width: 350px;">
+																				<dd style="height: 96px; width: 350px;" >
 																					<!-- ngRepeat: item in listAge -->
 																					<div class="alp_three ng-scope"
 																						ng-repeat="item in listAge" style="">
@@ -1681,8 +1441,7 @@ ng\:form {
 																			<dl>
 																				<dt>
 																					<label><input type="checkbox"
-																						name="tadmin.pTime" ng-model="tadmin.pTime"
-																						ng-click="share.fn.changeAllCheck('tadmin', 'time')"
+																						name="tadmin.pTime" onclick="allCheck('time')"
 																						class="ng-pristine ng-untouched ng-valid ng-not-empty"
 																						style="">시간대</label>
 																				</dt>
@@ -1870,7 +1629,7 @@ ng\:form {
 														<a id="act_rank_find" href="javascript:;"
 															ng-click="onPopup('reportPopup', 'tadmin', null, null);"
 															class="alp_btn2_map">리포트보기</a> <a id="act_rank_find"
-															href="javascript:;" ng-click="tadmin.fn.viewLayer();"
+															href="javascript:;" onclick="doSearch()"
 															class="alp_btn3_map btnPoint">결과보기</a>
 													</div>
 												</div>

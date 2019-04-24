@@ -14,7 +14,7 @@ public class ChartDaoImpl extends SqlSessionDaoSupport implements ChartDao{
 		List<ChartVO> test = new ArrayList<ChartVO>();
 		test.add(0, null);
 		test.add(1, null);
-		System.out.println(test);
+		System.out.println("========================"+getSqlSession().selectList("sampleTest.readList", baseYm));
 //		System.out.println(getSqlSession().selectList("sampleTest.readList"));
 		return getSqlSession().selectList("sampleTest.readList", baseYm);
 	}

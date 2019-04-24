@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gisData">
+	<select id="selectSido" resultType="com.ktds.gis.vo.GisVO" >
+		
+		select	distinct sido_cd sidoCd
+				,sido_nm sidoNm
+		from	admdong
+		order by sido_cd   
+	</select>
+	<select id="selectSgg" resultType="com.ktds.gis.vo.GisVO" parameterType="com.ktds.gis.vo.GisVO">
+		
+			select	distinct sgg_cd sggCd
+				,sgg_nm sggNm
+		from	admdong
+		where	sido_cd = #{sidoCd}
+		order by sgg_nm   
+	</select>
+	<select id="selectAdmdong" resultType="com.ktds.gis.vo.GisVO" parameterType="com.ktds.gis.vo.GisVO">
+			select	distinct admdong_cd admdongCd
+				,admdong_nm admdongNm
+		from	admdong
+		where	sgg_cd = #{sggCd}
+		order by admdong_nm
+	</select>
+	
+	
+</mapper>

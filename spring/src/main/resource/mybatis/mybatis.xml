@@ -13,6 +13,7 @@
 		<mapper resource="com/ktds/member/dao/sql/memberDao.xml" />
 		<mapper resource="com/ktds/board/dao/sql/boardDao.xml" />
 		<mapper resource="com/ktds/chart/dao/sql/chartDao.xml" />
+		<mapper resource="com/ktds/gis/dao/sql/gisDao.xml" />
 	</mappers>
  
 </configuration>

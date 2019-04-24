@@ -41,6 +41,8 @@ public class ChartController {
 		
 		List<ChartVO> listData = chartService.test(baseYm);
 		System.out.println("호출");
+		System.out.println(chartService.test(baseYm));
+		System.out.println(listData);
 		return listData;
 	}
 }
