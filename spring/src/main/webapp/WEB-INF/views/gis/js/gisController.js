@@ -1,15 +1,61 @@
 var map, layer;
 var daumMap = new OpenLayers.Layer.Daum(); // 지도관련lib DaumMap
 var mapnik = new OpenLayers.Layer.OSM(); // 지도관련lib? ollehmap으로 대체할것임
+var overlay = new OpenLayers.Layer.Vector('Overlay', {
+		styleMap : new OpenLayers.StyleMap({
+//	             externalGraphic: 'https://bigsight.kt.com/bdip/assets/img/tour/ico/ico_ranking_num01.png'
+	            	 externalGraphic: '/static/img/sk.png'
+	            ,graphicWidth: 30
+	            ,graphicHeight: 34
+	            ,graphicYOffset: -34
+	            ,title: 'youngbin'
+					})
+		});
 function init() {
-	map = new OpenLayers.Map('map');
+	map = new OpenLayers.Map({ // 초기 지도설정
+        div: "map" // 적용할 div id
+    	,projection: "EPSG:5181"  // 투영좌표계??EPSG:900913
+        ,displayProjection: "EPSG:5179" // 표시할 투영 좌표계??
+        ,eventListeners : {
+        	move : function(e){
+        		//console.log(map.getExtent().getCenterLonLat().clone());
+        	}
+        	// 마우스의 현재위치값 반환
+        	,mousemove : function(e){
+        		screenxy = this.events.getMousePosition(e);
+        		// console.log(screenxy);
+        	}
+        	,click : function(e){
+        		screenxy = this.events.getMousePosition(e);
+        		//console.log(map.getLonLatFromPixel(screenxy));
+        		var lonlat = map.getLonLatFromPixel(screenxy);
+        		var param = JSON.stringify({lon:lonlat.lon, lat:lonlat.lat}); // ajax통신시 json형식을
+        		alert(lonlat);
+        		marker(lonlat);
+        	}
+        }
+	});
 	layer = new OpenLayers.Layer.OSM("Simple OSM Map");
-	map.addLayer(daumMap);
+	map.addLayers([daumMap, overlay]);   // 한개는 map.addLayer(daumMap); 
 	 map.zoomToExtent(
 	            new OpenLayers.Bounds(
 	            		195725.7981815, 453422.25002345, 200989.01157, 448844.53255
 	            ).transform(map.displayProjection, map.projection)
 	        );
+	 // 마커찍기 다중
+//	 var myLocation = []; // 선택된 구의 상권위치정보를 담을 배열
+//	    var markerble = []; // 위치정보를 담은 배열을 담을 feature배열
+//		myLocation.push(new OpenLayers.Geometry.Point(195725.7981815, 453422.25002345).transform(map.displayProjection, map.projection));
+//		markerble.push(new OpenLayers.Feature.Vector(myLocation[0], {title:'young'}));
+//		overlay.addFeatures(markerble);
+		
+    var myLocation = new OpenLayers.Geometry.Point(195725.7981815, 453422.25002345).transform(map.displayProjection, map.projection);
+    
+
+    // We add the marker with a tooltip text to the overlay
+    overlay.addFeatures([
+        new OpenLayers.Feature.Vector(myLocation, {tooltip: 'OpenLayers'})
+    ]);
 	 // 지역비교로 초기값
 	 searchToggle(1);
 	 // 최초 로딩시 시도 리스트 가져옴
@@ -42,7 +88,13 @@ function init() {
 	        }
 	    });
 }
-
+function marker(lonlat){
+	var myLocation = []; // 선택된 구의 상권위치정보를 담을 배열
+    var markerble = []; // 위치정보를 담은 배열을 담을 feature배열
+	myLocation.push(new OpenLayers.Geometry.Point(lonlat.lon,lonlat.lat).transform(map.displayProjection, map.projection));
+	markerble.push(new OpenLayers.Feature.Vector(myLocation[0], {title:'young'}));
+	overlay.addFeatures(markerble);
+}
 function doSidoSet(sidoCd){
 	alert("선택한 option은"+sidoCd);
 }
