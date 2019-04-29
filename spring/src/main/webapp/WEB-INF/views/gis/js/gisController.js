@@ -4,7 +4,7 @@ var mapnik = new OpenLayers.Layer.OSM(); // 지도관련lib? ollehmap으로 대�
 var overlay = new OpenLayers.Layer.Vector('Overlay', {
 		styleMap : new OpenLayers.StyleMap({
 //	             externalGraphic: 'https://bigsight.kt.com/bdip/assets/img/tour/ico/ico_ranking_num01.png'
-	            	 externalGraphic: '/static/img/sk.png'
+	            	 externalGraphic: ''
 	            ,graphicWidth: 30
 	            ,graphicHeight: 34
 	            ,graphicYOffset: -34
@@ -115,6 +115,43 @@ function doSearch(){
 		alert("년월 : "+param.baseYm + "\n시도 : "+param.sidoCd +  "\n시군구 : "+param.sggCd + "\n읍면동 : "+ param.admdongCd);
 	}
 	
+	
+	$.ajax({
+		type : "POST",
+		url : "/searchBstor",
+		data : param,
+		error : function(){
+			alert("호출실패");
+		},
+		success : function(d){
+			console.log(d);
+			
+			 var myLocation = []; // 선택된 구의 상권위치정보를 담을 배열
+			 var myLocation2 = []; // 선택된 구의 상권위치정보를 담을 배열
+			 var myLocation3 = []; // 선택된 구의 상권위치정보를 담을 배열
+		    var markerble = []; // 위치정보를 담은 배열을 담을 feature배열
+		    var markerble2 = []; // 위치정보를 담은 배열을 담을 feature배열
+		    var markerble3 = []; // 위치정보를 담은 배열을 담을 feature배열
+		    for(var i = 0; i < d.length; i++){
+		    	if(d[i].bstorTypeCd == 'B01'){
+//		    		myLocation.push();
+		    		markerble.push(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(d[i].lon, d[i].lat).transform(map.displayProjection, map.projection), {title:'young'}));
+		    	}else if(d[i].bstorTypeCd == 'B02'){
+		    		markerble2.push(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(d[i].lon, d[i].lat).transform(map.displayProjection, map.projection), {title:'young'}));
+		    	}else {
+		    		markerble3.push(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(d[i].lon, d[i].lat).transform(map.displayProjection, map.projection), {title:'young'}));
+		    	}
+//		    	, {externalGraphic: '/static/img/kt.png'}
+		    }
+		    overlay.addFeatures(markerble);
+		    overlay.styleMap.styles.default.defaultStyle.externalGraphic ='/static/img/sk.png';
+			overlay.addFeatures(markerble2);
+			overlay.styleMap.styles.default.defaultStyle.externalGraphic ='/static/img/kt.png';
+			overlay.addFeatures(markerble3);
+			overlay.styleMap.styles.default.defaultStyle.externalGraphic ='/static/img/lg.png';
+//			overlay.styleMap.styles.default.defaultStyle ='/static/img/sk.png'; 
+		}
+	});
 }
 
 

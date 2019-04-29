@@ -2,10 +2,13 @@ package com.ktds.gis.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.gis.service.GisService;
@@ -53,5 +56,12 @@ public class GisController {
 	public List<GisVO> getAdmdongList(@PathVariable String sggCd) {
 		List<GisVO> admdongList = gisService.getAdmdongList(sggCd);
 		return admdongList;
+	}
+	// 검색조건 param 가져오기
+	@RequestMapping(value="/searchBstor", method = RequestMethod.POST)
+	@ResponseBody
+	public List<GisVO> paramList(GisVO gisvo) {
+		List<GisVO> bstorList = gisService.getBstorList(gisvo);
+		return bstorList;
 	}
 }

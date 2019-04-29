@@ -3,6 +3,8 @@ package com.ktds.gis.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 
 import com.ktds.gis.vo.GisVO;
@@ -25,8 +27,13 @@ public List<GisVO> selectSgg(String sidoCd) {
 
 @Override
 public List<GisVO> selectAdmdong(String sggCd) {
-	// TODO Auto-generated method stub
+	System.out.println("파람텟"+getSqlSession().selectList("gisData.selectAdmdong", sggCd));
 	return getSqlSession().selectList("gisData.selectAdmdong", sggCd);
+}
+
+@Override
+public List<GisVO> selectBstor(GisVO gisvo) {
+	return getSqlSession().selectList("gisData.selectBstor", gisvo);
 }
 
 

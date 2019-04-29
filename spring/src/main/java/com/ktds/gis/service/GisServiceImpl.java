@@ -2,6 +2,8 @@ package com.ktds.gis.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.ktds.gis.dao.GisDao;
 import com.ktds.gis.vo.GisVO;
 
@@ -30,6 +32,11 @@ public class GisServiceImpl implements GisService {
 	public List<GisVO> getAdmdongList(String sggCd) {
 		// TODO Auto-generated method stub
 		return gisDao.selectAdmdong(sggCd);
+	}
+	@Override
+	public List<GisVO> getBstorList(GisVO gisvo) {
+		// TODO Auto-generated method stub
+		return gisDao.selectBstor(gisvo);
 	}
 }
  

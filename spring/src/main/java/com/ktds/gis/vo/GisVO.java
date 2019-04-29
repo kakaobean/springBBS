@@ -8,6 +8,11 @@ public class GisVO {
 	private String sggCd;
 	private String admdongNm;
 	private String admdongCd;
+	private String bstorId;
+	private String bstorTypeCd;
+	private String lon;
+	private String lat;
+	
 	
 	public String getSidoNm() {
 		return sidoNm;
@@ -45,5 +50,30 @@ public class GisVO {
 	public void setAdmdongCd(String admdongCd) {
 		this.admdongCd = admdongCd;
 	}
+	public String getBstorId() {
+		return bstorId;
+	}
+	public void setBstorId(String bstorId) {
+		this.bstorId = bstorId;
+	}
+	public String getBstorTypeCd() {
+		return bstorTypeCd;
+	}
+	public void setBstorTypeCd(String bstorTypeCd) {
+		this.bstorTypeCd = bstorTypeCd;
+	}
+	public String getLon() {
+		return lon;
+	}
+	public void setLon(String lon) {
+		this.lon = lon;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	
 	
 }

@@ -22,8 +22,31 @@
 			select	distinct admdong_cd admdongCd
 				,admdong_nm admdongNm
 		from	admdong
-		where	sgg_cd = #{sggCd}
+		where	sgg_cd = #{sggCd} 
 		order by admdong_nm
+	</select>
+	
+	<select id="selectBstor" resultType="com.ktds.gis.vo.GisVO" parameterType="com.ktds.gis.vo.GisVO">
+<!-- 			select  bstor_id bstorId -->
+<!-- 					, sgg_nm sggNm -->
+<!-- 					, admdong_nm admdongNm -->
+<!-- 			from    adm_bstor_adm -->
+<!-- 			where    sgg_cd = #{sggCd} -->
+<!-- 			union all -->
+<!-- 			select  bstor_id bstorId -->
+<!-- 					, sgg_nm sggNm -->
+<!-- 					, admdong_nm admdongNm -->
+<!-- 			from    adm_bstor_adm -->
+<!-- 			where    admdong_cd = #{admdongCd} -->
+			
+			select t101.sgg_nm sggNm
+			        ,t101.admdong_cd admdongCd
+			        ,t102.bstor_type_cd bstorTypeCd
+			        ,t101.lon lon
+			        ,t101.lat lat
+			from    random_xy t101 inner join adm_bstor_adm t102
+			on      t101.admdong_cd = t102.admdong_cd
+			where  t101.sgg_cd =  #{sggCd}
 	</select>
 	
 	
